@@ -1,6 +1,6 @@
 //需要登录的异常
 class NeedLogin extends HiNetError{
-  NeedLogin({code = 401, message = '请先登录'}) : super(code, message);
+  NeedLogin({int code = 401, String message = '请先登录'}) : super(code, message);
   
 }
 

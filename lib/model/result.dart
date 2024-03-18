@@ -22,3 +22,5 @@ class Result {
   // 固定格式
   Map<String, dynamic> toJson() => _$ResultToJson(this);
 }
+
+//flutter packages pub run build_runner build

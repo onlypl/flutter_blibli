@@ -29,35 +29,25 @@ class HiNet {
     } on HiNetError catch (e) {
       error = e;
       response = e.data;
-      printLog(e.message);
     } catch (e) {
       error = e;
-      printLog(e);
-    }
-    if (response == null) {
-      printLog(error);
     }
 
     var result = response?.data;
-    printLog('i_net:$result');
+    printLog('请求结果:$result');
+     print('------------------');
    var status = response?.statusCode;
-    var hiError;
      switch (status) {
       case 200:
         return result;
       case 401:
-        hiError = NeedLogin();
-        break;
+        throw  NeedLogin();
       case 403:
-        hiError = NeedAuth(result.toString(), data: result);
-        break;
+       throw  NeedAuth(result.toString(), data: result);
       default:
         // 如果 error 不为空，则复用现有的 error
-        hiError =
-            error ?? HiNetError(status ?? -1, result.toString(), data: result);
-        break;
+       throw error ?? HiNetError(status ?? -1, result.toString(), data: result);
     }
-    throw hiError;
   }
 
   Future<dynamic> send<T>(BaseRequest request) async {

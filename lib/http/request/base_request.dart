@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names, prefer_typing_uninitialized_variables, avoid_print
 
+import 'package:blibli/http/dao/login_dao.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 //基础请求
 
@@ -30,6 +32,10 @@ abstract class BaseRequest {
     }else{
        uri = Uri.http(autority(),pathStr,params);
     }
+    if(needLogin()){
+        //给需要的接口携带登录令牌
+        addHeader(LoginDao.BOAROING_PASS, LoginDao.getBoardingPass());
+    }
      print('url:${uri.toString()}');
        return uri.toString();
   }
@@ -40,10 +46,15 @@ abstract class BaseRequest {
     params[k] = v.toString();
     return this;
   }
-  Map<String,dynamic> header = {};
+
+  Map<String,dynamic> header = {
+    'course-flag' : 'fa',
+    'auth-token' : 'ZmEtMjAyMS0wNC0xMiAyMToyMjoyMC1mYQ==fa',
+  };
+
   //添加参数
   BaseRequest addHeader(String k, Object v){
-    params[k] = v.toString();
+    header[k] = v.toString();
     return this;
   }
 }
