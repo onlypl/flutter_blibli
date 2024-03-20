@@ -1,4 +1,4 @@
-// ignore_for_file: unused_element, avoid_print
+// ignore_for_file: unused_element, avoid_print, constant_identifier_names
 
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/http/core/hi_net.dart';
@@ -31,9 +31,11 @@ class LoginDao {
      print(result);
      print("1-------------------");
     
-    if(result['staus'] == 0 &&result['data']!=null){
+    if(result['code'] == 0 &&result['data']!=null){
         //保存登录令牌
         HiCache.getInstance().setString(BOAROING_PASS, result['data']);
+        print("保存令牌");
+    
     }
     print("2-------------------");
     return result;

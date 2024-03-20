@@ -1,23 +1,22 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
+import 'package:blibli/navigator/hi_navigator.dart';
+import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net.dart';
 import 'package:blibli/http/dao/login_dao.dart';
 import 'package:blibli/util/string_util.dart';
 import 'package:blibli/util/toast.dart';
+import 'package:blibli/widget/appbar.dart';
 import 'package:blibli/widget/login_button.dart';
 import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
-import 'package:flutter/material.dart';
-
-import 'package:blibli/widget/appbar.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class LoginPage extends StatefulWidget {
-  final VoidCallback? onJumpRegistrion;
   const LoginPage({
-    Key? key,
-    this.onJumpRegistrion,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -31,7 +30,9 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: appbar('登录', '注册', widget.onJumpRegistrion ?? () {}),
+      appBar: appbar('登录', '注册', () {
+        HiNavigator.getInstance().onJumpTo(RouteStatus.registration);
+      }),
       body: Container(
         child: ListView(
           children: [
@@ -81,9 +82,6 @@ class _LoginPageState extends State<LoginPage> {
     });
   }
 
-  _loginButton() {
-    return Container();
-  }
 
   void send() async {
     try {
@@ -92,6 +90,7 @@ class _LoginPageState extends State<LoginPage> {
       if (result["code"] == 0) {
         print('登录成功');
         showToast('登录成功');
+        HiNavigator.getInstance().onJumpTo(RouteStatus.home);
       } else {
         print(result['msg']);
         showWarnToast(result['msg']);

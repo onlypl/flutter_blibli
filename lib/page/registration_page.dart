@@ -3,6 +3,7 @@
 
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/dao/login_dao.dart';
+import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/util/string_util.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:blibli/widget/login_button.dart';
@@ -13,10 +14,8 @@ import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
 
 class RegistrationPage extends StatefulWidget {
-  final VoidCallback? onJumpToLogin;
   const RegistrationPage({
     Key? key,
-    this.onJumpToLogin,
   }) : super(key: key);
 
   @override
@@ -34,7 +33,9 @@ class _RegistrationPageState extends State<RegistrationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: appbar('注册', '登录', widget.onJumpToLogin ?? () {}),
+        appBar: appbar('注册', '登录', () {
+          HiNavigator.getInstance().onJumpTo(RouteStatus.login);
+        }),
         body: Container(
           child: ListView(
             //自适应键盘弹出 防止遮挡
@@ -146,9 +147,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       if (result['code'] == 0) {
         print('注册成功');
          showToast('注册成功');
-        if (widget.onJumpToLogin != null) {
-          widget.onJumpToLogin!();
-        }
+         HiNavigator.getInstance().onJumpTo(RouteStatus.login);
       } else {
         print(result['msg']);
          showWarnToast(result['msg']);
