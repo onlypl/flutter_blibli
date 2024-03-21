@@ -1,10 +1,16 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
+import 'package:blibli/http/core/hi_error.dart';
+import 'package:blibli/http/core/hi_state.dart';
+import 'package:blibli/http/dao/home_dao.dart';
+import 'package:blibli/model/home_mo.dart';
+import 'package:blibli/model/result.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blibli/model/video_model.dart';
+import 'package:logger/web.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
 //首页
@@ -17,15 +23,17 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage>
+class _HomePageState extends HiState<HomePage>
     with AutomaticKeepAliveClientMixin, TickerProviderStateMixin {
   var listener;
   TabController? _controller;
-  var tabs = ["推荐", "热门", "追播", "影视", "搞笑", "日常", "综合", "手机游戏", "短片·手书·配音"];
+
+  List<CategoryMo> categoryList = [];
+  List<BannerMo> bannerList = [];
   @override
   void initState() {
     super.initState();
-    _controller = TabController(length: tabs.length, vsync: this);
+    _controller = TabController(length: categoryList.length, vsync: this);
     HiNavigator.getInstance().addListener(listener = (current, pre) {
       print("home:${current.page}");
       print("home_pre:${pre.page}");
@@ -35,11 +43,13 @@ class _HomePageState extends State<HomePage>
         print('首页:onPause');
       }
     });
+    loadData();
   }
 
   @override
   void dispose() {
     HiNavigator.getInstance().removeListener(listener);
+    _controller?.dispose();
     super.dispose();
   }
 
@@ -55,13 +65,13 @@ class _HomePageState extends State<HomePage>
               padding: const EdgeInsets.only(top: 30),
               child: _tabBar(),
             ),
-            Flexible(child: TabBarView(
+            Flexible(
+                child: TabBarView(
               controller: _controller,
-              children: tabs.map((tab){
-                  return HomTabPage(name: tab);
+              children: categoryList.map((mo) {
+                return HomTabPage(name: mo.name,bannerList:mo.name == '推荐'?bannerList:[]);
               }).toList(),
-              )
-            ),
+            )),
           ],
         ));
   }
@@ -72,24 +82,45 @@ class _HomePageState extends State<HomePage>
   _tabBar() {
     return TabBar(
         controller: _controller,
+        tabAlignment: TabAlignment.start,
         isScrollable: true,
         labelColor: Colors.black,
         indicator: const UnderlineIndicator(
           strokeCap: StrokeCap.round,
           borderSide: BorderSide(color: primary, width: 3),
-     //     insets: EdgeInsets.only(left: 15, right: 15),
+          //     insets: EdgeInsets.only(left: 15, right: 15),
         ),
-        tabs: tabs.map<Tab>(
-          (tab) {
+        tabs: categoryList.map<Tab>(
+          (mo) {
             return Tab(
                 child: Padding(
-             padding: const EdgeInsets.only(left: 5, right: 5),
+              padding: const EdgeInsets.only(left: 5, right: 5),
               child: Text(
-                tab,
+                mo.name ?? "",
                 style: const TextStyle(fontSize: 16),
               ),
             ));
           },
         ).toList());
+  }
+
+  void loadData() async {
+    try {
+      HomeMo result = await HomeDao.get('推荐');
+      if (result.categoryList != null) {
+        _controller = TabController(
+            length: result.categoryList?.length ?? 0, vsync: this);
+      }
+      setState(() {
+        categoryList = result.categoryList ?? [];
+        bannerList = result.bannerList ?? [];
+      });
+    } on NeedAuth catch (e) {
+      Logger().e(e);
+    } on NeedLogin catch (e) {
+      Logger().e(e);
+    } catch (e) {
+      Logger().e(e);
+    }
   }
 }

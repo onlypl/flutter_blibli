@@ -36,9 +36,11 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   dio: ^5.4.1
-  json_annotation: ^4.8.1
-  fluttertoast: ^8.2.4
-  underline_indicator: ^0.0.4
+  json_annotation: ^4.8.1  #创建数据模型配合json_serializable,build_runner使用
+  fluttertoast: ^8.2.4      #Toast提示
+  underline_indicator: ^0.0.4 #指示器
+  logger: ^2.1.0        #log日志打印
+  card_swiper: ^3.0.1  #轮播图
 
 dev_dependencies:
   flutter_test:
@@ -50,8 +52,8 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
-  json_serializable: ^6.7.1
-  build_runner: ^2.4.8
+  json_serializable: ^6.7.1 #数据模型序列化 json_annotation,build_runner使用
+  build_runner: ^2.4.8    #代码生成和模块化编译 json_annotation,json_serializable使用
   shared_preferences: ^2.2.2
   
 # For information on the generic Dart part of this file, see the
