@@ -2,6 +2,7 @@
 
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/model/video_model.dart';
+import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_page..dart';
 import 'package:blibli/page/login_page.dart';
@@ -91,7 +92,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     // 跳转首页时将栈中其它页面进行出栈，因为首页不可回退
     if (routeStatus == RouteStatus.home) {
       pages.clear();
-      page = pageWrap(const HomePage());
+      page = pageWrap(const BottomNavigator());
     } else if (routeStatus == RouteStatus.detail) {
       page = pageWrap(VideoDetailPage(videoModel ?? VideoModel(vid: -1)));
     } else if (routeStatus == RouteStatus.registration) {

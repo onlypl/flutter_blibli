@@ -1,6 +1,7 @@
 
 // ignore_for_file: prefer_conditional_assignment, collection_methods_unrelated_type, avoid_print
 
+import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/page/home_page..dart';
 import 'package:blibli/page/login_page.dart';
 import 'package:blibli/page/registration_page.dart';
@@ -37,7 +38,7 @@ RouteStatus getStatus(MaterialPage page){
       return RouteStatus.login;
   }else if(page.child is RegistrationPage){
       return RouteStatus.registration;
-  }else if(page.child is HomePage){
+  }else if(page.child is BottomNavigator){
       return RouteStatus.home;
   }else if(page.child is VideoDetailPage){
       return RouteStatus.detail;
@@ -63,7 +64,8 @@ class HiNavigator extends _RouteJumpListener{
   final List<RouteChangeListener> _listeners = [];
   HiNavigator._();
   RouteStatusInfo? _current;
-
+  //首页底部tab
+  RouteStatusInfo? _bottomTab;
   static HiNavigator getInstance() {
     if (_instance == null) {
       _instance = HiNavigator._();
@@ -74,6 +76,12 @@ class HiNavigator extends _RouteJumpListener{
    RouteStatusInfo? getCurrent() {
     return _current;
   }
+  ///首页底部tab切换监听
+  void onBottomTabChange(int index,Widget page){
+    _bottomTab = RouteStatusInfo(RouteStatus.home, page);
+    _notify(_bottomTab!);
+  }
+
   /// 注册路由跳转逻辑
   void registerRouteJump(RouteJumpListener routeJumpListener){
      _routeJump = routeJumpListener;
@@ -101,6 +109,10 @@ class HiNavigator extends _RouteJumpListener{
   }
   
   void _notify(RouteStatusInfo current) {
+    if(current.page is BottomNavigator && _bottomTab != null){
+            //如果打开的是首页,则明确到首页具体的tab
+            current = _bottomTab!;
+    }
     print("hi_Navigator:current:${current.page}");
      print("hi_Navigator:pre:${_current?.page}");
      _listeners.forEach((listener) {
