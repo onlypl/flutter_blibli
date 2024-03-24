@@ -3,13 +3,10 @@ import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/http/dao/home_dao.dart';
 import 'package:blibli/model/home_mo.dart';
-import 'package:blibli/model/result.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:flutter/material.dart';
-
-import 'package:blibli/model/video_model.dart';
 import 'package:logger/web.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
@@ -62,7 +59,7 @@ class _HomePageState extends HiState<HomePage>
           children: [
             Container(
               color: Colors.white,
-              padding: const EdgeInsets.only(top: 30),
+              padding: const EdgeInsets.only(top: 40),
               child: _tabBar(),
             ),
             Flexible(

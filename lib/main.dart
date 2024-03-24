@@ -1,16 +1,14 @@
 // ignore_for_file: avoid_print, prefer_is_empty, deprecated_member_use, camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:blibli/db/hi_cache.dart';
-import 'package:blibli/model/video_model.dart';
+import 'package:blibli/model/home_mo.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
-import 'package:blibli/navigator/hi_navigator.dart';
-import 'package:blibli/page/home_page..dart';
-import 'package:blibli/page/login_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:flutter/material.dart';
-
+import 'package:blibli/navigator/hi_navigator.dart';
+import 'package:blibli/page/login_page.dart';
 import 'http/dao/login_dao.dart';
 import 'page/registration_page.dart';
 
@@ -68,7 +66,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       HiNavigator.getInstance().registerRouteJump(RouteJumpListener(onJumpTo: (routeStatus, {Map? args}) {
         _routeStatus = routeStatus;
         if(routeStatus == RouteStatus.detail){
-            videoModel = args!['videoModel'];
+            videoMo = args!['videoMo'];
         }
         notifyListeners();
       }));
@@ -78,7 +76,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
 
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = [];
-  VideoModel? videoModel;
+  VideoMo? videoMo;
   @override
   Widget build(BuildContext context) {
     var index = getpageIndex(pages, routeStatus);
@@ -94,7 +92,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       pages.clear();
       page = pageWrap(const BottomNavigator());
     } else if (routeStatus == RouteStatus.detail) {
-      page = pageWrap(VideoDetailPage(videoModel ?? VideoModel(vid: -1)));
+      page = pageWrap(VideoDetailPage(videoMo ?? VideoMo(vid: '-1')));
     } else if (routeStatus == RouteStatus.registration) {
       page = pageWrap(const RegistrationPage());
     } else if (routeStatus == RouteStatus.login) {
@@ -138,7 +136,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
   RouteStatus get routeStatus {
     if (_routeStatus != RouteStatus.registration && !hasLogin) {
       return _routeStatus = RouteStatus.login;
-    } else if (videoModel != null) {
+    } else if (videoMo != null) {
       return _routeStatus = RouteStatus.detail;
     }
     return _routeStatus;

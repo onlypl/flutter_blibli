@@ -1,6 +1,6 @@
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/favorite_page.dart';
-import 'package:blibli/page/home_page..dart';
+import 'package:blibli/page/home_page.dart';
 import 'package:blibli/page/profile_page.dart';
 import 'package:blibli/page/ranking_page.dart';
 import 'package:blibli/util/color.dart';
