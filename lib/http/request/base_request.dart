@@ -2,6 +2,8 @@
 
 import 'package:blibli/http/dao/login_dao.dart';
 
+import '../../util/log.dart';
+
 enum HttpMethod { GET, POST, DELETE }
 //基础请求
 
@@ -36,7 +38,7 @@ abstract class BaseRequest {
         //给需要的接口携带登录令牌
         addHeader(LoginDao.BOAROING_PASS, LoginDao.getBoardingPass());
     }
-     print('url:${uri.toString()}');
+     Log().info('url:${uri.toString()}');
        return uri.toString();
   }
   bool needLogin();

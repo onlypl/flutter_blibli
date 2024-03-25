@@ -13,6 +13,8 @@ import 'package:blibli/widget/login_button.dart';
 import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
 
+import '../util/log.dart';
+
 class LoginPage extends StatefulWidget {
   const LoginPage({
     super.key,
@@ -86,23 +88,22 @@ class _LoginPageState extends State<LoginPage> {
   void send() async {
     try {
       var result = await LoginDao.login(userName, password);
-      print('11111111${result["code"]}');
       if (result["code"] == 0) {
-        print('登录成功');
+        Log().info('登录成功');
         showToast('登录成功');
         HiNavigator.getInstance().onJumpTo(RouteStatus.home);
       } else {
-        print(result['msg']);
+        Log().info(result['msg']);
         showWarnToast(result['msg']);
       }
     } on NeedLogin catch (e) {
-      print(e);
+      Log().info(e);
        showWarnToast(e.message);
     } on NeedAuth catch (e) {
-      print(e);
+      Log().info(e);
         showWarnToast(e.message);
     } catch (e) {
-      print(e);
+      Log().info(e);
         showWarnToast(e.toString());
     }
   }

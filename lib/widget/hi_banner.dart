@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/util/color.dart';
+import 'package:blibli/util/log.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import 'package:logger/web.dart';
@@ -55,7 +56,7 @@ class _HiBannerState extends State<HiBanner> {
   _image(BannerMo? bannerMo, double right) {
     return InkWell(
       onTap: () {
-        Logger().i(bannerMo?.title ?? "");
+        Log().info(bannerMo?.title ?? "");
         _handleClick(bannerMo);
       },
       child: Container(
@@ -78,9 +79,9 @@ class _HiBannerState extends State<HiBanner> {
     if (bannerMo.type == "video") {
       HiNavigator.getInstance().onJumpTo(RouteStatus.detail,
           args: {'videoMo': VideoMo(vid: bannerMo.url)});
-          Logger().e("跳转逻辑");
+          Log().info("跳转逻辑");
     }else{
-      Logger().i(bannerMo.url);
+      Log().info(bannerMo.url);
     }
   }
 }

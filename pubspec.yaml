@@ -41,6 +41,8 @@ dependencies:
   underline_indicator: ^0.0.4 #指示器
   logger: ^2.1.0        #log日志打印
   card_swiper: ^3.0.1  #轮播图
+  status_bar_control: ^3.2.1 #状态栏控件，可让您控制 iOS 和 Android 上的状态栏颜色、样式（主题）、可见性和半透明属性。
+  flutter_staggered_grid_view: ^0.7.0 #瀑布流
 
 dev_dependencies:
   flutter_test:

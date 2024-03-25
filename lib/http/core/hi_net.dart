@@ -5,6 +5,7 @@ import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net_adapter.dart';
 import 'package:blibli/http/core/mock_adapter.dart';
 import 'package:blibli/http/request/base_request.dart';
+import 'package:blibli/util/log.dart';
 
 /// 1.支持网络库插拔设计，且不干扰业务层
 /// 2.基于配置请求请求，简洁易用
@@ -34,8 +35,8 @@ class HiNet {
     }
 
     var result = response?.data;
-    printLog('请求结果:$result');
-     print('------------------');
+   // printLog('请求结果:$result');
+     Log().info('------------------');
    var status = response?.statusCode;
      switch (status) {
       case 200:
@@ -51,7 +52,7 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(BaseRequest request) async {
-    print('i_net:url:${request.url()}');
+    Log().info('i_net:url:${request.url()}');
     //使用Dio发送请求
     HiNetAdapter adapter = DioAdapter();
     return adapter.send(request);
@@ -59,6 +60,6 @@ class HiNet {
   }
 
   void printLog(log) {
-    print('hi_net:${log.toString()}');
+    Log().info('hi_net:${log.toString()}');
   }
 }

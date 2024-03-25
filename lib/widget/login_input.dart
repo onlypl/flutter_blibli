@@ -2,6 +2,8 @@
 import 'package:blibli/util/color.dart';
 import 'package:flutter/material.dart';
 
+import '../util/log.dart';
+
 class LoginInput extends StatefulWidget {
   const LoginInput({
     Key? key,
@@ -31,7 +33,7 @@ class _LoginInputState extends State<LoginInput> {
     super.initState();
     //是否获取到焦点监听
     _foucusNode.addListener(() {
-      print("是否有焦点:${_foucusNode.hasFocus}");
+      Log().info("是否有焦点:${_foucusNode.hasFocus}");
       if (widget.focusChanged != null) {
         widget.focusChanged!(_foucusNode.hasFocus);
       }

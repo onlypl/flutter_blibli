@@ -6,6 +6,8 @@ import 'package:blibli/http/request/base_request.dart';
 import 'package:blibli/http/request/login_request.dart';
 import 'package:blibli/http/request/registration_request.dart';
 
+import '../../util/log.dart';
+
 class LoginDao {
   static const BOAROING_PASS = 'boarding-pass';
   static login(String userName, String password) {
@@ -28,16 +30,16 @@ class LoginDao {
     request.add("userName", userName).add("password", password);
 
     var result = await HiNet.getInstance().fire(request);
-     print(result);
-     print("1-------------------");
+    //  Log().info(result);
+    //  Log().info("1-------------------");
     
     if(result['code'] == 0 &&result['data']!=null){
         //保存登录令牌
         HiCache.getInstance().setString(BOAROING_PASS, result['data']);
-        print("保存令牌");
+        Log().info("保存令牌");
     
     }
-    print("2-------------------");
+   // Log().info("2-------------------");
     return result;
   }
   static getBoardingPass(){

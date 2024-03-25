@@ -1,4 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
+import 'package:blibli/util/log.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:logger/web.dart';
+import 'package:underline_indicator/underline_indicator.dart';
+
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/http/dao/home_dao.dart';
@@ -6,14 +12,14 @@ import 'package:blibli/model/home_mo.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
-import 'package:flutter/material.dart';
-import 'package:logger/web.dart';
-import 'package:underline_indicator/underline_indicator.dart';
+import 'package:blibli/widget/navigantion_bar.dart';
 
 //首页
 class HomePage extends StatefulWidget {
+  final ValueChanged<int>? onJumpTo;
   const HomePage({
     super.key,
+    this.onJumpTo,
   });
 
   @override
@@ -32,12 +38,12 @@ class _HomePageState extends HiState<HomePage>
     super.initState();
     _controller = TabController(length: categoryList.length, vsync: this);
     HiNavigator.getInstance().addListener(listener = (current, pre) {
-      print("home:${current.page}");
-      print("home_pre:${pre.page}");
+      Log().info("home:${current.page}");
+      Log().info("home_pre:${pre.page}");
       if (widget == current.page || current.page is HomePage) {
-        print('首页:onResume');
+        Log().info('首页:onResume');
       } else if (widget == pre?.page || pre?.page is HomePage) {
-        print('首页:onPause');
+        Log().info('首页:onPause');
       }
     });
     loadData();
@@ -54,28 +60,35 @@ class _HomePageState extends HiState<HomePage>
   Widget build(BuildContext context) {
     super.build(context);
     return Scaffold(
-        appBar: null,
+        // appBar: null,
         body: Column(
-          children: [
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.only(top: 40),
-              child: _tabBar(),
-            ),
-            Flexible(
-                child: TabBarView(
-              controller: _controller,
-              children: categoryList.map((mo) {
-                return HomTabPage(name: mo.name,bannerList:mo.name == '推荐'?bannerList:[]);
-              }).toList(),
-            )),
-          ],
-        ));
+      children: [
+        BLNavigationBar( //沉侵导航栏
+          height: 50,
+          child: _appBar(),
+          color: primary,
+          statusStyle: StatusStyle.LIGHT_CONTENT,
+        ),
+        Container(//顶部选项卡容器
+          color: Colors.white,
+          padding: const EdgeInsets.only(top: 0),
+          child: _tabBar(),
+        ),
+        Flexible(//子控件TabBarView充满父控件
+            child: TabBarView(
+          controller: _controller,
+          children: categoryList.map((mo) {
+            return HomTabPage(
+                categoryName: mo.name, bannerList: mo.name == '推荐' ? bannerList : []);
+          }).toList(),
+        )),
+      ],
+    ));
   }
 
   @override
   bool get wantKeepAlive => true;
-
+  //顶部分类选项卡
   _tabBar() {
     return TabBar(
         controller: _controller,
@@ -101,6 +114,7 @@ class _HomePageState extends HiState<HomePage>
         ).toList());
   }
 
+  ///获取顶部分类选项卡数据
   void loadData() async {
     try {
       HomeMo result = await HomeDao.get('推荐');
@@ -113,11 +127,67 @@ class _HomePageState extends HiState<HomePage>
         bannerList = result.bannerList ?? [];
       });
     } on NeedAuth catch (e) {
-      Logger().e(e);
+      
+      Log().error(e);
     } on NeedLogin catch (e) {
-      Logger().e(e);
+      Log().error(e);
     } catch (e) {
-      Logger().e(e);
+      Log().error(e);
     }
+  }
+
+  ///导航栏
+  _appBar() {
+    return Padding(
+      padding: const EdgeInsets.only(left: 15, right: 15),
+      child: Row(
+        children: [
+          InkWell(
+            onTap: () {
+              if (widget.onJumpTo != null) {
+                widget.onJumpTo!(3);
+              }
+            },
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(23),
+              child: const Image(
+                  height: 46,
+                  width: 46,
+                  image: AssetImage("assets/images/avatar.png")),
+            ),
+          ),
+          Expanded(
+            //填充剩余空间
+            child: Padding(
+              padding: const EdgeInsets.only(left: 15, right: 15),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(16),
+                child: Container(
+                  padding: const EdgeInsets.only(left: 10),
+                  height: 32,
+                  alignment: Alignment.centerLeft,
+                  decoration: BoxDecoration(color: Colors.grey[100]),
+                  child: const Icon(
+                    Icons.search,
+                    color: Colors.grey,
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Icon(
+            Icons.explore_outlined,
+            color: Colors.white,
+          ),
+          const Padding(
+            padding: EdgeInsets.only(left: 12),
+            child: Icon(
+              Icons.mail_outline,
+              color: Colors.white,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -3,6 +3,9 @@
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/model/home_mo.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
+import 'package:blibli/page/favorite_page.dart';
+import 'package:blibli/page/profile_page.dart';
+import 'package:blibli/page/ranking_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/util/toast.dart';

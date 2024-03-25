@@ -24,7 +24,7 @@ class _BottomNavigatorState extends State<BottomNavigator> {
   @override
   Widget build(BuildContext context) {
     _pages = [
-      const HomePage(),
+      HomePage(onJumpTo: (index) => _onJumpTo(index,pageChange: false)),
       const RankingPage(),
       const FavoritePage(),
       const ProfilePage()
@@ -38,9 +38,9 @@ class _BottomNavigatorState extends State<BottomNavigator> {
     return Scaffold(
       body: PageView(
         controller: _controller,
-        children: _pages!,
         onPageChanged:(index) => _onJumpTo(index,pageChange: true),
-        physics: const NeverScrollableScrollPhysics(), //禁止滑动
+        physics: const NeverScrollableScrollPhysics(),
+        children: _pages!, //禁止滑动
       ),
       bottomNavigationBar: BottomNavigationBar(
           type: BottomNavigationBarType.fixed, //未选中也显示文本

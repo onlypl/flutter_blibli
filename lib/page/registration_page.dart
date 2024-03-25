@@ -13,6 +13,8 @@ import 'package:blibli/widget/appbar.dart';
 import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
 
+import '../util/log.dart';
+
 class RegistrationPage extends StatefulWidget {
   const RegistrationPage({
     Key? key,
@@ -129,7 +131,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
   //       if (loginEnable) {
   //         checkParams();
   //       } else {
-  //         print('按钮不可点击');
+  //         Log().info('按钮不可点击');
   //       }
   //     },
   //     child: const Text(
@@ -143,23 +145,22 @@ class _RegistrationPageState extends State<RegistrationPage> {
     try {
       var result =
           await LoginDao.registration(userName, password, imoocId, orderId);
-      print(result);
       if (result['code'] == 0) {
-        print('注册成功');
+        Log().info('注册成功');
          showToast('注册成功');
          HiNavigator.getInstance().onJumpTo(RouteStatus.login);
       } else {
-        print(result['msg']);
+        Log().info(result['msg']);
          showWarnToast(result['msg']);
       }
     } on NeedLogin catch (e) {
-      print(e);
+      Log().info(e);
       showWarnToast(e.toString());
     } on NeedAuth catch (e) {
-      print(e);
+      Log().info(e);
       showWarnToast(e.toString());
     } catch (e) {
-      print(e);
+      Log().info(e);
       showWarnToast(e.toString());
     }
   }
@@ -172,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       tips = '请输入订单号后四位';
     }
     if (tips != null) {
-      print(tips);
+      Log().info(tips);
        showWarnToast(tips);
       return;
     }
