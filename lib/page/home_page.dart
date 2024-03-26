@@ -1,7 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
+import 'dart:ffi';
+
 import 'package:blibli/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:logger/web.dart';
 import 'package:underline_indicator/underline_indicator.dart';
 
@@ -13,6 +16,8 @@ import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/widget/navigantion_bar.dart';
+
+import '../widget/loading_container.dart';
 
 //首页
 class HomePage extends StatefulWidget {
@@ -33,6 +38,7 @@ class _HomePageState extends HiState<HomePage>
 
   List<CategoryMo> categoryList = [];
   List<BannerMo> bannerList = [];
+  bool _isloading = true;
   @override
   void initState() {
     super.initState();
@@ -61,29 +67,32 @@ class _HomePageState extends HiState<HomePage>
     super.build(context);
     return Scaffold(
         // appBar: null,
-        body: Column(
-      children: [
-        BLNavigationBar( //沉侵导航栏
-          height: 50,
-          child: _appBar(),
-          color: primary,
-          statusStyle: StatusStyle.LIGHT_CONTENT,
-        ),
-        Container(//顶部选项卡容器
-          color: Colors.white,
-          padding: const EdgeInsets.only(top: 0),
-          child: _tabBar(),
-        ),
-        Flexible(//子控件TabBarView充满父控件
-            child: TabBarView(
-          controller: _controller,
-          children: categoryList.map((mo) {
-            return HomTabPage(
-                categoryName: mo.name, bannerList: mo.name == '推荐' ? bannerList : []);
-          }).toList(),
-        )),
-      ],
-    ));
+        body: LoadingContainer(
+        //  cover: true,
+          isLoading: _isloading,
+          child: Column(
+          children: [
+          BLNavigationBar( //沉侵导航栏
+            height: 50,
+            child: _appBar(),
+            color: primary,
+            statusStyle: StatusStyle.LIGHT_CONTENT,
+          ),
+          Container(//顶部选项卡容器
+            color: Colors.white,
+            child: _tabBar(),
+          ),
+          Flexible(//子控件TabBarView充满父控件
+              child: TabBarView(
+            controller: _controller,
+            children: categoryList.map((mo) {
+              return HomTabPage(
+                  categoryName: mo.name, bannerList: mo.name == '推荐' ? bannerList : null);
+            }).toList(),
+          )),
+                ],
+              ),
+        ));
   }
 
   @override
@@ -125,14 +134,17 @@ class _HomePageState extends HiState<HomePage>
       setState(() {
         categoryList = result.categoryList ?? [];
         bannerList = result.bannerList ?? [];
+        _isloading = false;
       });
     } on NeedAuth catch (e) {
-      
       Log().error(e);
+       _isloading = false;
     } on NeedLogin catch (e) {
       Log().error(e);
+       _isloading = false;
     } catch (e) {
       Log().error(e);
+       _isloading = false;
     }
   }
 

@@ -44,15 +44,19 @@ class _BiliAppState extends State<BiliApp> {
           return MaterialApp(
             home: widget,
             theme: ThemeData(
-              colorScheme: ColorScheme.fromSeed(
-                seedColor: primary, //主题色
-              ).copyWith(secondary: Colors.white), //次要颜色
+              primaryColor:primary ,
+              cardTheme: const CardTheme( //card默认颜色
+                color: Colors.white
+              ),
+              // colorScheme: ColorScheme.fromSeed(
+              //   seedColor: Colors.white, //主题色
+              // )
+              //     .copyWith(secondary: Colors.white)
+              //     .copyWith(onPrimary: Colors.white), //次要颜色
               //   ColorScheme.fromSwatch(
               //   primarySwatch: white
-              // ).copyWith(
-              //   secondary: Colors.green //次要颜色
               // ),
-              //useMaterial3: true,
+              useMaterial3: true,
               appBarTheme: const AppBarTheme(color: white),
             ),
           );
@@ -64,25 +68,26 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     with ChangeNotifier, PopNavigatorRouterDelegateMixin<BiliRoutePath> {
   final GlobalKey<NavigatorState> navigationKey;
   //为Navigator设置一个key，必要的时候可以通过navigatorKey.currentState来获取到NavigatorState对象
-  BiliRouteDelegate() : navigationKey = GlobalKey<NavigatorState>(){
-      //实现路由跳转逻辑
-      HiNavigator.getInstance().registerRouteJump(RouteJumpListener(onJumpTo: (routeStatus, {Map? args}) {
-        _routeStatus = routeStatus;
-        if(routeStatus == RouteStatus.detail){
-            videoMo = args!['videoMo'];
-        }
-        notifyListeners();
-      }));
+  BiliRouteDelegate() : navigationKey = GlobalKey<NavigatorState>() {
+    //实现路由跳转逻辑
+    HiNavigator.getInstance().registerRouteJump(
+        RouteJumpListener(onJumpTo: (routeStatus, {Map? args}) {
+      _routeStatus = routeStatus;
+      if (routeStatus == RouteStatus.detail) {//视频详情取出要传递的参数
+        videoMo = args!['videoMo'];
+      }
+      notifyListeners();
+    }));
   }
   @override
   GlobalKey<NavigatorState>? get navigatorKey => GlobalKey<NavigatorState>();
 
   RouteStatus _routeStatus = RouteStatus.home;
-  List<MaterialPage> pages = [];
+  List<MaterialPage> pages = []; //页面数组
   VideoMo? videoMo;
   @override
   Widget build(BuildContext context) {
-    var index = getpageIndex(pages, routeStatus);
+    var index = getpageIndex(pages, routeStatus); //获取页面在栈里的位置
     List<MaterialPage> tempPages = pages;
     if (index != -1) {
       // 要打开的页面在栈中已存在，则将该页面和它上面的所有页面进行出栈
@@ -104,36 +109,36 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     // 重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
     //通知路由发生变化
-    HiNavigator.getInstance().notify(tempPages,pages);
+    HiNavigator.getInstance().notify(tempPages, pages);
     pages = tempPages;
-    return WillPopScope(
+    return WillPopScope(//处理页面是否弹出
       onWillPop: () async => !await navigationKey.currentState!.maybePop(),
-      child:Navigator(
-      key: navigationKey,
-      pages: pages,
-      onPopPage: (route, result) {
-        if(route.settings is MaterialPage){
+      child: Navigator(
+        key: navigationKey,
+        pages: pages,
+        onPopPage: (route, result) {
+          if (route.settings is MaterialPage) {
             //登录页未登录返回拦截
-            if((route.settings as MaterialPage).child is LoginPage){
-                  if(!hasLogin){
-                      showToast('请先登录');
-                      return false;
-                  }
+            if ((route.settings as MaterialPage).child is LoginPage) {
+              if (!hasLogin) {
+                showToast('请先登录');
+                return false;
+              }
             }
-        }
-        //执行返回操作
-        //在这里可以控制是否可以返回
-        if (!route.didPop(result)) {
-          return false;
-        }
-        var tempPages = [...pages];
-        pages.removeLast();
-        //通知路由发生变化
-        HiNavigator.getInstance().notify(pages, tempPages);
-        return true;
-      },
-    ), );
-  
+          }
+          //执行返回操作
+          //在这里可以控制是否可以返回
+          if (!route.didPop(result)) {
+            return false;
+          }
+          var tempPages = [...pages];
+          pages.removeLast();
+          //通知路由发生变化
+          HiNavigator.getInstance().notify(pages, tempPages);
+          return true;
+        },
+      ),
+    );
   }
 
   RouteStatus get routeStatus {

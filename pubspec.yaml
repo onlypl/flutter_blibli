@@ -43,7 +43,15 @@ dependencies:
   card_swiper: ^3.0.1  #轮播图
   status_bar_control: ^3.2.1 #状态栏控件，可让您控制 iOS 和 Android 上的状态栏颜色、样式（主题）、可见性和半透明属性。
   flutter_staggered_grid_view: ^0.7.0 #瀑布流
-
+  transparent_image: ^2.0.1 #淡入淡出图片
+  cached_network_image: ^3.3.1  #图片缓存
+  lottie: ^3.1.0 #json动画
+  animations: ^2.0.11  #容器转场动画
+  pull_to_refresh: ^2.0.0 #上下拉刷新
+  webview_flutter: ^4.7.0 #webView组件
+  flutter_easyloading: ^3.0.5 # HUD
+  loading_animation_widget: ^1.2.1 #全局加载动画
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -71,6 +79,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+    - assets/
     - assets/images/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
