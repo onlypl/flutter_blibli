@@ -3,15 +3,13 @@
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/model/home_mo.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
-import 'package:blibli/page/favorite_page.dart';
-import 'package:blibli/page/profile_page.dart';
-import 'package:blibli/page/ranking_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/login_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'http/dao/login_dao.dart';
 import 'page/registration_page.dart';
 
@@ -34,31 +32,38 @@ class _BiliAppState extends State<BiliApp> {
         //进行初始化
         future: HiCache.preInit(),
         builder: (BuildContext context, AsyncSnapshot<HiCache> snapshot) {
+          //获取主页面
           var widget = snapshot.connectionState == ConnectionState.done
               ? Router(
                   routerDelegate: _routeDelegate,
                 )
               : const Scaffold(
                   body: Center(child: CircularProgressIndicator()));
-
-          return MaterialApp(
-            home: widget,
-            theme: ThemeData(
-              primaryColor:primary ,
-              cardTheme: const CardTheme( //card默认颜色
-                color: Colors.white
-              ),
-              // colorScheme: ColorScheme.fromSeed(
-              //   seedColor: Colors.white, //主题色
-              // )
-              //     .copyWith(secondary: Colors.white)
-              //     .copyWith(onPrimary: Colors.white), //次要颜色
-              //   ColorScheme.fromSwatch(
-              //   primarySwatch: white
-              // ),
-              useMaterial3: true,
-              appBarTheme: const AppBarTheme(color: white),
-            ),
+          return ScreenUtilInit(
+            designSize: const Size(360, 690), //设置设计稿尺寸
+            minTextAdapt: true,   //最小文本适应
+            splitScreenMode: true,    //支持分屏尺寸
+            builder: (context, child) {
+              return MaterialApp(
+                home: widget, //主页面
+                theme: ThemeData(
+                  primaryColor: primary,
+                  cardTheme: const CardTheme(
+                      //card默认颜色
+                      color: Colors.white),
+                  // colorScheme: ColorScheme.fromSeed(
+                  //   seedColor: Colors.white, //主题色
+                  // )
+                  //     .copyWith(secondary: Colors.white)
+                  //     .copyWith(onPrimary: Colors.white), //次要颜色
+                  //   ColorScheme.fromSwatch(
+                  //   primarySwatch: white
+                  // ),
+                  useMaterial3: true,
+                  appBarTheme: const AppBarTheme(color: white),
+                ),
+              );
+            },
           );
         });
   }
@@ -73,7 +78,8 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     HiNavigator.getInstance().registerRouteJump(
         RouteJumpListener(onJumpTo: (routeStatus, {Map? args}) {
       _routeStatus = routeStatus;
-      if (routeStatus == RouteStatus.detail) {//视频详情取出要传递的参数
+      if (routeStatus == RouteStatus.detail) {
+        //视频详情取出要传递的参数
         videoMo = args!['videoMo'];
       }
       notifyListeners();
@@ -111,7 +117,8 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     //通知路由发生变化
     HiNavigator.getInstance().notify(tempPages, pages);
     pages = tempPages;
-    return WillPopScope(//处理页面是否弹出
+    return WillPopScope(
+      //处理页面是否弹出
       onWillPop: () async => !await navigationKey.currentState!.maybePop(),
       child: Navigator(
         key: navigationKey,

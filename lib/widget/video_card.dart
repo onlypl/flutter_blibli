@@ -6,9 +6,6 @@ import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blibli/model/home_mo.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:transparent_image/transparent_image.dart';
-
 import '../util/log.dart';
 
 class VideoCard extends StatelessWidget {

@@ -1,11 +1,8 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:blibli/util/color.dart';
-import 'package:flutter/material.dart';
-import 'package:status_bar_control/status_bar_control.dart';
 
-// ignore: constant_identifier_names
+import 'package:blibli/util/view_util.dart';
+import 'package:flutter/material.dart';
 enum  StatusStyle { LIGHT_CONTENT,DARK_CONTENT}
-class BLNavigationBar extends StatelessWidget {
+class BLNavigationBar extends StatefulWidget {
   final StatusStyle statusStyle;
   final Color color;
   final double height;
@@ -14,29 +11,35 @@ class BLNavigationBar extends StatelessWidget {
     super.key,
     this.statusStyle = StatusStyle.DARK_CONTENT,
     this.color = Colors.white,
-    this.height = 46,
+    this.height = 44,
     this.child,
   });
 
   @override
-  Widget build(BuildContext context) {
+  State<BLNavigationBar> createState() => _BLNavigationBarState();
+}
+
+class _BLNavigationBarState extends State<BLNavigationBar> {
+  @override
+  void initState() {
+    super.initState();
     _statusBarInit();
+  }
+  @override
+  Widget build(BuildContext context) {
     //状态栏高度
     var top = MediaQuery.of(context).padding.top;
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: top + height,
+      height: top + widget.height,
       padding: EdgeInsets.only(top: top),
-      decoration: BoxDecoration(color: color),
-      child: child,
+      decoration: BoxDecoration(color: widget.color),
+      child: widget.child,
     );
   }
 
   void _statusBarInit() {
     //设置沉侵状态栏
-    StatusBarControl.setColor(primary, animated: true);
-    StatusBarControl.setStyle(statusStyle == StatusStyle.DARK_CONTENT
-        ? StatusBarStyle.DARK_CONTENT
-        : StatusBarStyle.LIGHT_CONTENT);
+   changeStatusBar(color: widget.color,statusStyle: widget.statusStyle);
   }
 }

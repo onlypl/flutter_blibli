@@ -1,10 +1,7 @@
 // ignore_for_file: prefer_conditional_assignment, collection_methods_unrelated_type, avoid_print
 
 import 'package:blibli/navigator/bottom_navigator.dart';
-import 'package:blibli/page/favorite_page.dart';
 import 'package:blibli/page/login_page.dart';
-import 'package:blibli/page/profile_page.dart';
-import 'package:blibli/page/ranking_page.dart';
 import 'package:blibli/page/registration_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:flutter/material.dart';

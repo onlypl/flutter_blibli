@@ -51,7 +51,11 @@ dependencies:
   webview_flutter: ^4.7.0 #webView组件
   flutter_easyloading: ^3.0.5 # HUD
   loading_animation_widget: ^1.2.1 #全局加载动画
-  
+  fijkplayer: ^0.11.0   #播放器
+  video_player: ^2.8.3 #官方播放器插件
+  chewie: ^1.7.5     #基于video_payer封装的播放器
+  flutter_screenutil: ^5.9.0 #适配屏幕和字体大小的flutter插件。让你的UI在不同的屏幕尺寸上显示合理的布局
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

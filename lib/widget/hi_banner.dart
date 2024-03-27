@@ -4,8 +4,6 @@ import 'package:blibli/util/color.dart';
 import 'package:blibli/util/log.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import 'package:logger/web.dart';
-
 import '../model/home_mo.dart';
 
 class HiBanner extends StatefulWidget {

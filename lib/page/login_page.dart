@@ -1,10 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:flutter/material.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-
 import 'package:blibli/http/core/hi_error.dart';
-import 'package:blibli/http/core/hi_net.dart';
 import 'package:blibli/http/dao/login_dao.dart';
 import 'package:blibli/util/string_util.dart';
 import 'package:blibli/util/toast.dart';

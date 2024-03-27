@@ -2,7 +2,6 @@
 import 'package:blibli/util/color.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-import 'package:lottie/lottie.dart';
 //带lottie动画的加载进度条组件
 class LoadingContainer extends StatelessWidget {
   final Widget child;

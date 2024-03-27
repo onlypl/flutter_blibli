@@ -3,7 +3,6 @@
 import 'package:blibli/http/core/dio_adapter.dart';
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net_adapter.dart';
-import 'package:blibli/http/core/mock_adapter.dart';
 import 'package:blibli/http/request/base_request.dart';
 import 'package:blibli/util/log.dart';
 

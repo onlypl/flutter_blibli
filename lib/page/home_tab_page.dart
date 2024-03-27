@@ -7,9 +7,6 @@ import 'package:blibli/widget/video_card.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import '../http/core/hi_error.dart';
 import '../http/dao/home_dao.dart';
 import '../util/log.dart';
