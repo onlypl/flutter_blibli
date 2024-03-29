@@ -1,7 +1,6 @@
 // ignore_for_file: avoid_print, prefer_is_empty, deprecated_member_use, camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:blibli/db/hi_cache.dart';
-import 'package:blibli/model/home_mo.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/util/color.dart';
@@ -11,6 +10,7 @@ import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/login_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'http/dao/login_dao.dart';
+import 'model/video_model.dart';
 import 'page/registration_page.dart';
 
 void main() {
@@ -90,7 +90,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
 
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = []; //页面数组
-  VideoMo? videoMo;
+  VideoModel? videoMo;
   @override
   Widget build(BuildContext context) {
     var index = getpageIndex(pages, routeStatus); //获取页面在栈里的位置
@@ -106,7 +106,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       pages.clear();
       page = pageWrap(const BottomNavigator());
     } else if (routeStatus == RouteStatus.detail) {
-      page = pageWrap(VideoDetailPage(videoMo ?? VideoMo(vid: '-1')));
+      page = pageWrap(VideoDetailPage(videoMo ?? VideoModel(vid: '-1')));
     } else if (routeStatus == RouteStatus.registration) {
       page = pageWrap(const RegistrationPage());
     } else if (routeStatus == RouteStatus.login) {

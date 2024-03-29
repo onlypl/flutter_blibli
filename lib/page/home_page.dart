@@ -1,14 +1,10 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
 
-import 'package:blibli/page/profile_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/util/log.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/hi_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:underline_indicator/underline_indicator.dart';
-
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/http/dao/home_dao.dart';

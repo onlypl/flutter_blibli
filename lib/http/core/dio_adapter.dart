@@ -5,6 +5,7 @@
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net_adapter.dart';
 import 'package:blibli/http/request/base_request.dart';
+import 'package:blibli/util/log.dart';
 import 'package:dio/dio.dart';
 
 class DioAdapter extends HiNetAdapter {
@@ -25,11 +26,20 @@ class DioAdapter extends HiNetAdapter {
     } on DioException catch (e) {
       error = e;
       response = e.response;
+      if (response != null) {
+        Log().error(response.data);
+        Log().error(response.headers);
+        Log().error(response.requestOptions);
+      } else {
+        // Something happened in setting up or sending the request that triggered an Error
+        Log().error(e.requestOptions);
+        Log().error(e.message);
+      }
     }
-
+    
     if (error != null) {
-      throw HiNetError(response?.statusCode ?? -1, error.toString(),
-          data:await buildRes(response, request));
+      throw HiNetError(response?.statusCode ?? -1, error.message,
+          data: await buildRes(response, request));
     }
     return buildRes(response, request);
   }

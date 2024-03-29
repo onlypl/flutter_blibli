@@ -5,6 +5,7 @@ import 'package:blibli/util/log.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import '../model/home_mo.dart';
+import '../model/video_model.dart';
 
 class HiBanner extends StatefulWidget {
   final List<BannerMo> bannerList;
@@ -76,7 +77,7 @@ class _HiBannerState extends State<HiBanner> {
     }
     if (bannerMo.type == "video") {
       HiNavigator.getInstance().onJumpTo(RouteStatus.detail,
-          args: {'videoMo': VideoMo(vid: bannerMo.url)});
+          args: {'videoMo': VideoModel(vid: bannerMo.url)});
           Log().info("跳转逻辑");
     }else{
       Log().info(bannerMo.url);

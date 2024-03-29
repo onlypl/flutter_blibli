@@ -21,7 +21,7 @@ class PLogOutput extends LogOutput {
 
 
 class PLogFilter extends LogFilter {
-  static const bool kReleaseMode = true;
+  static const bool kReleaseMode = false;
   @override
   bool shouldLog(LogEvent event) {
     if (kReleaseMode) {

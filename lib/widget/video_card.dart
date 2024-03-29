@@ -4,12 +4,11 @@ import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/util/format_util.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
-
-import 'package:blibli/model/home_mo.dart';
+import '../model/video_model.dart';
 import '../util/log.dart';
 
 class VideoCard extends StatelessWidget {
-  final VideoMo videoMo;
+  final VideoModel videoMo;
   const VideoCard({
     super.key,
     required this.videoMo,

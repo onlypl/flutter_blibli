@@ -11,7 +11,8 @@ String countFormat(int count){
 
 
 ///时间转换将秒转换为小时:分钟:秒
-
+///[seconds] 秒
+///[isShowHour] 是否显示小时
 String durationTransForm(int seconds,bool isShowHour){
   String hourStr = ''; //小时
   String minuteStr = '';  //分钟  

@@ -4,11 +4,10 @@ import 'package:blibli/util/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:blibli/widget/hi_banner.dart';
 import 'package:blibli/widget/video_card.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import '../http/core/hi_error.dart';
 import '../http/dao/home_dao.dart';
+import '../model/video_model.dart';
 import '../util/log.dart';
 
 class HomTabPage extends StatefulWidget {
@@ -26,7 +25,7 @@ class HomTabPage extends StatefulWidget {
 
 class _HomTabPageState extends State<HomTabPage>
     with AutomaticKeepAliveClientMixin {
-  List<VideoMo> videoList = [];
+  List<VideoModel> videoList = [];
   int pageIndex = 1; //数据页码
   bool _loading = false;
   final ScrollController _scrollController = ScrollController();

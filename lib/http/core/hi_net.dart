@@ -5,6 +5,7 @@ import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net_adapter.dart';
 import 'package:blibli/http/request/base_request.dart';
 import 'package:blibli/util/log.dart';
+import 'package:blibli/util/toast.dart';
 
 /// 1.支持网络库插拔设计，且不干扰业务层
 /// 2.基于配置请求请求，简洁易用
@@ -30,11 +31,12 @@ class HiNet {
       error = e;
       response = e.data;
     } catch (e) {
+       Log().error('错误:${e.toString()}');
       error = e;
     }
 
     var result = response?.data;
-   // printLog('请求结果:$result');
+  //  printLog('请求结果:$result');
      Log().info('------------------');
    var status = response?.statusCode;
      switch (status) {
@@ -43,10 +45,11 @@ class HiNet {
       case 401:
         throw  NeedLogin();
       case 403:
-       throw  NeedAuth(result.toString(), data: result);
+      //  showWarnToast(response?.statusMessage ??'未知异常');
+       throw  NeedAuth(response?.statusMessage ??'未知异常', data: result);
       default:
-        // 如果 error 不为空，则复用现有的 error
-       throw error ?? HiNetError(status ?? -1, result.toString(), data: result);
+       String msg = error == null?response?.statusMessage ??'未知异常':error.toString();
+       throw  HiNetError(status ?? -1,msg, data: result);
     }
   }
 

@@ -7,11 +7,11 @@ class LoginButton extends StatefulWidget {
   final bool enable;
   final VoidCallback? onPressed;
   const LoginButton({
-    Key? key,
+    super.key,
     required this.title,
     this.enable = true,
     this.onPressed,
-  }) : super(key: key);
+  });
 
   @override
   State<LoginButton> createState() => _LoginButtonState();

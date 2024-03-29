@@ -8,7 +8,7 @@ abstract class HiState<T extends StatefulWidget> extends State<T> {
     if (mounted) {
       super.setState(fn);
     } else {
-       Log().info('HiState:页面已销毁,本次setState不执行${toString()}');
+       Log().debug('HiState:页面已销毁,本次setState不执行${toString()}');
     }
   }
 }
