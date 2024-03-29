@@ -1,15 +1,15 @@
 import 'video_model.dart';
 
 
-class VideoDetailMo {
+class VideoDetailModel {
   bool? isFavorite;
   bool? isLike;
   VideoModel? videoInfo;
   List<VideoModel>? videoList;
 
-  VideoDetailMo({this.isFavorite, this.isLike, this.videoInfo, this.videoList});
+  VideoDetailModel({this.isFavorite, this.isLike, this.videoInfo, this.videoList});
 
-  VideoDetailMo.fromJson(Map<String, dynamic> json) {
+  VideoDetailModel.fromJson(Map<String, dynamic> json) {
     isFavorite = json['isFavorite'];
     isLike = json['isLike'];
     videoInfo = json['videoInfo'] != null

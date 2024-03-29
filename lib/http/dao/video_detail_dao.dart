@@ -1,6 +1,6 @@
 import 'package:blibli/http/core/hi_net.dart';
 import 'package:blibli/http/request/video_detail_request.dart';
-import 'package:blibli/model/video_detail_mo.dart';
+import 'package:blibli/model/video_detail_model.dart';
 
 import '../../util/log.dart';
 
@@ -10,6 +10,6 @@ class VideoDetailDao{
     request.pathParams = vid;
    var result = await HiNet.getInstance().fire(request);
     Log().debug(result);
-    return VideoDetailMo.fromJson(result['data']);
+    return VideoDetailModel.fromJson(result['data']);
   }
 }

@@ -10,6 +10,7 @@ import '../model/video_model.dart';
 class VideoHead extends StatelessWidget {
   final Owner? owner;
   final VoidCallback? onFacePressed;
+  
   const VideoHead({
     super.key,
     required this.owner,
@@ -25,10 +26,9 @@ class VideoHead extends StatelessWidget {
         children: [
           _userInfo(),
           MaterialButton(
-            onPressed:(){},
-           // onFacePressed,
+            onPressed:onFacePressed ?? (){},
             color: primary,
-           // height: 30,
+            height: 30,
             minWidth: 50,
             child: const Text(
               '+ 关注',

@@ -4,13 +4,13 @@ import 'package:blibli/util/format_util.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
 
-import 'package:blibli/model/video_detail_mo.dart';
+import 'package:blibli/model/video_detail_model.dart';
 
 import '../model/video_model.dart';
 
 ///视频点赞分享收藏等工具栏
 class VideoToolBar extends StatefulWidget {
-  final VideoDetailMo detailMo;
+  final VideoDetailModel detailMo;
   final VideoModel videoModel;
   final VoidCallback? onLike;
   final VoidCallback? onUnLike;

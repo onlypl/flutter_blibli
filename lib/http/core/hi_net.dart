@@ -36,8 +36,8 @@ class HiNet {
     }
 
     var result = response?.data;
-  //  printLog('请求结果:$result');
-     Log().info('------------------');
+    Log().info('请求结果:$result');
+     Log().info('请求到结果------------------');
    var status = response?.statusCode;
      switch (status) {
       case 200:
@@ -48,8 +48,7 @@ class HiNet {
       //  showWarnToast(response?.statusMessage ??'未知异常');
        throw  NeedAuth(response?.statusMessage ??'未知异常', data: result);
       default:
-       String msg = error == null?response?.statusMessage ??'未知异常':error.toString();
-       throw  HiNetError(status ?? -1,msg, data: result);
+       throw  error ?? HiNetError(status ?? -1, result.toString(), data: result);
     }
   }
 

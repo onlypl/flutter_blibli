@@ -1,23 +1,23 @@
 import 'video_model.dart';
 
-class HomeMo {
-  List<BannerMo>? bannerList;
-  List<CategoryMo>? categoryList;
+class HomeModel {
+  List<BannerModel>? bannerList;
+  List<CategoryModel>? categoryList;
   List<VideoModel>? videoList;
 
-  HomeMo({this.bannerList, this.categoryList, this.videoList});
+  HomeModel({this.bannerList, this.categoryList, this.videoList});
 
-  HomeMo.fromJson(Map<String, dynamic> json) {
+  HomeModel.fromJson(Map<String, dynamic> json) {
     if (json['bannerList'] != null) {
-      bannerList = <BannerMo>[];
+      bannerList = <BannerModel>[];
       json['bannerList'].forEach((v) {
-        bannerList!.add(BannerMo.fromJson(v));
+        bannerList!.add(BannerModel.fromJson(v));
       });
     }
     if (json['categoryList'] != null) {
-      categoryList = <CategoryMo>[];
+      categoryList = <CategoryModel>[];
       json['categoryList'].forEach((v) {
-        categoryList!.add(CategoryMo.fromJson(v));
+        categoryList!.add(CategoryModel.fromJson(v));
       });
     }
     if (json['videoList'] != null) {
@@ -43,7 +43,7 @@ class HomeMo {
   }
 }
 
-class BannerMo {
+class BannerModel {
   String? id;
   int? sticky;
   String? type;
@@ -53,7 +53,7 @@ class BannerMo {
   String? cover;
   String? createTime;
 
-  BannerMo(
+  BannerModel(
       {this.id,
       this.sticky,
       this.type,
@@ -63,7 +63,7 @@ class BannerMo {
       this.cover,
       this.createTime});
 
-  BannerMo.fromJson(Map<String, dynamic> json) {
+  BannerModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     sticky = json['sticky'];
     type = json['type'];
@@ -88,13 +88,13 @@ class BannerMo {
   }
 }
 
-class CategoryMo {
+class CategoryModel {
   String? name;
   int? count;
 
-  CategoryMo({this.name, this.count});
+  CategoryModel({this.name, this.count});
 
-  CategoryMo.fromJson(Map<String, dynamic> json) {
+  CategoryModel.fromJson(Map<String, dynamic> json) {
     name = json['name'];
     count = json['count'];
   }

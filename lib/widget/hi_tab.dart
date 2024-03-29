@@ -11,6 +11,7 @@ class HiTab extends StatelessWidget {
   final double boderWidth;
   final double insets;
   final Color unselectedLabelColor;
+  final TabAlignment tabAlignment;
    const HiTab(
       this.tabs,{
        super.key,
@@ -19,13 +20,14 @@ class HiTab extends StatelessWidget {
         this.boderWidth = 0,
         this.insets = 0,
         this.unselectedLabelColor = Colors.black,
+        this.tabAlignment = TabAlignment.start,
   });
 
   @override
   Widget build(BuildContext context) {
     return TabBar(
         controller: controller,
-        tabAlignment: TabAlignment.start,
+        tabAlignment: tabAlignment,
         isScrollable: true,
         labelColor:primary ,
         unselectedLabelColor:unselectedLabelColor ,

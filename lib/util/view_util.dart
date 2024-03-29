@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:blibli/util/format_util.dart';
@@ -94,4 +95,16 @@ SizedBox hiSpace({double height = 1 ,double width = 1}){
         width: width,
         height: height,
     );
+}
+
+///底部阴影
+BoxDecoration bottomBoxShadow(){
+  return BoxDecoration(color:  Colors.white,boxShadow: [
+    BoxShadow(
+      offset:const Offset(0, 5), //xy轴偏移量
+      color: (Colors.grey[100])!,
+      blurRadius: 5,  //阴影 模糊程度
+      spreadRadius: 1 //阴影扩散程度
+    )
+  ]);
 }

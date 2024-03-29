@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/http/dao/home_dao.dart';
-import 'package:blibli/model/home_mo.dart';
+import 'package:blibli/model/home_model.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
@@ -36,8 +36,8 @@ class _HomePageState extends HiState<HomePage>
   var listener;
   TabController? _controller;
 
-  List<CategoryMo> categoryList = [];
-  List<BannerMo> bannerList = [];
+  List<CategoryModel> categoryList = [];
+  List<BannerModel> bannerList = [];
   bool _isloading = true;
   late Widget _currentPage;
   @override
@@ -122,8 +122,9 @@ class _HomePageState extends HiState<HomePage>
           ),
           Container(
             //顶部选项卡容器
-            color: Colors.white,
+            //color: Colors.white,
             child: _tabBar(),
+            decoration: bottomBoxShadow(),
           ),
           Flexible(
               //子控件TabBarView充满父控件
@@ -167,7 +168,7 @@ class _HomePageState extends HiState<HomePage>
   ///获取顶部分类选项卡数据
   void loadData() async {
     try {
-      HomeMo result = await HomeDao.get('推荐');
+      HomeModel result = await HomeDao.get('推荐');
       if (result.categoryList != null) {
         _controller = TabController(
             length: result.categoryList?.length ?? 0, vsync: this);

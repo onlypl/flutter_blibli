@@ -8,18 +8,18 @@ import '../model/video_model.dart';
 import '../util/log.dart';
 
 class VideoCard extends StatelessWidget {
-  final VideoModel videoMo;
+  final VideoModel videoModel;
   const VideoCard({
     super.key,
-    required this.videoMo,
+    required this.videoModel,
   });
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Log().info(videoMo.url);
-        HiNavigator.getInstance().onJumpTo(RouteStatus.detail,args: {"videoMo":videoMo});
+        Log().info(videoModel.url);
+        HiNavigator.getInstance().onJumpTo(RouteStatus.detail,args: {"videoModel":videoModel});
       },
       child: SizedBox(
         height: 200,
@@ -31,7 +31,7 @@ class VideoCard extends StatelessWidget {
               children: [
                 _itemImage(context),
                 _infoText(
-                    videoMo.title, videoMo.owner?.face, videoMo.owner?.name),
+                    videoModel.title, videoModel.owner?.face, videoModel.owner?.name),
               ],
             ),
           ),
@@ -45,7 +45,7 @@ class VideoCard extends StatelessWidget {
     final size = MediaQuery.of(context).size;
     return Stack(
       children: [
-        cachedImage(videoMo.cover ?? "",
+        cachedImage(videoModel.cover ?? "",
         width: (size.width - 30) / 2,
         height: 120
         ),
@@ -66,9 +66,9 @@ class VideoCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  _iconText(Icons.ondemand_video, videoMo.view),
-                  _iconText(Icons.favorite_border, videoMo.favorite),
-                  _iconText(null, videoMo.duration),
+                  _iconText(Icons.ondemand_video, videoModel.view),
+                  _iconText(Icons.favorite_border, videoModel.favorite),
+                  _iconText(null, videoModel.duration),
                 ],
               ),
             )),

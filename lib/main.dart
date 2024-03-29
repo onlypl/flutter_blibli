@@ -80,7 +80,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       _routeStatus = routeStatus;
       if (routeStatus == RouteStatus.detail) {
         //视频详情取出要传递的参数
-        videoMo = args!['videoMo'];
+        videoModel = args!['videoModel'];
       }
       notifyListeners();
     }));
@@ -90,7 +90,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
 
   RouteStatus _routeStatus = RouteStatus.home;
   List<MaterialPage> pages = []; //页面数组
-  VideoModel? videoMo;
+  VideoModel? videoModel;
   @override
   Widget build(BuildContext context) {
     var index = getpageIndex(pages, routeStatus); //获取页面在栈里的位置
@@ -106,7 +106,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
       pages.clear();
       page = pageWrap(const BottomNavigator());
     } else if (routeStatus == RouteStatus.detail) {
-      page = pageWrap(VideoDetailPage(videoMo ?? VideoModel(vid: '-1')));
+      page = pageWrap(VideoDetailPage(videoModel ?? VideoModel(vid: '-1')));
     } else if (routeStatus == RouteStatus.registration) {
       page = pageWrap(const RegistrationPage());
     } else if (routeStatus == RouteStatus.login) {
@@ -128,7 +128,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
             //登录页未登录返回拦截
             if ((route.settings as MaterialPage).child is LoginPage) {
               if (!hasLogin) {
-                showToast('请先登录');
+                showWarnToast('请先登录');
                 return false;
               }
             }
@@ -151,7 +151,7 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
   RouteStatus get routeStatus {
     if (_routeStatus != RouteStatus.registration && !hasLogin) {
       return _routeStatus = RouteStatus.login;
-    } else if (videoMo != null) {
+    } else if (videoModel != null) {
       return _routeStatus = RouteStatus.detail;
     }
     return _routeStatus;

@@ -4,11 +4,11 @@ import 'package:blibli/util/color.dart';
 import 'package:blibli/util/log.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
-import '../model/home_mo.dart';
+import '../model/home_model.dart';
 import '../model/video_model.dart';
 
 class HiBanner extends StatefulWidget {
-  final List<BannerMo> bannerList;
+  final List<BannerModel> bannerList;
   final double bannerHeight;
   final EdgeInsetsGeometry? panding;
   const HiBanner({
@@ -52,7 +52,7 @@ class _HiBannerState extends State<HiBanner> {
     );
   }
 
-  _image(BannerMo? bannerMo, double right) {
+  _image(BannerModel? bannerMo, double right) {
     return InkWell(
       onTap: () {
         Log().info(bannerMo?.title ?? "");
@@ -71,13 +71,13 @@ class _HiBannerState extends State<HiBanner> {
     );
   }
 
-  void _handleClick(BannerMo? bannerMo) {
+  void _handleClick(BannerModel? bannerMo) {
     if(bannerMo == null){
         return;
     }
     if (bannerMo.type == "video") {
       HiNavigator.getInstance().onJumpTo(RouteStatus.detail,
-          args: {'videoMo': VideoModel(vid: bannerMo.url)});
+          args: {'videoModel': VideoModel(vid: bannerMo.url)});
           Log().info("跳转逻辑");
     }else{
       Log().info(bannerMo.url);

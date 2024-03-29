@@ -5,7 +5,7 @@ import 'dart:io';
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/dao/favorrite_dao.dart';
 import 'package:blibli/http/dao/video_detail_dao.dart';
-import 'package:blibli/model/video_detail_mo.dart';
+import 'package:blibli/model/video_detail_model.dart';
 import 'package:blibli/util/log.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:blibli/util/view_util.dart';
@@ -21,8 +21,8 @@ import 'package:flutter/material.dart';
 import '../model/video_model.dart';
 
 class VideoDetailPage extends StatefulWidget {
-  final VideoModel videoMo;
-  const VideoDetailPage(this.videoMo, {super.key});
+  final VideoModel videoModel;
+  const VideoDetailPage(this.videoModel, {super.key});
 
   @override
   State<VideoDetailPage> createState() => _VideoDetailPageState();
@@ -32,7 +32,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     with TickerProviderStateMixin {
   late TabController _tabController;
   final List tabs = ["简介", "评论2888"];
-   VideoDetailMo videoDetailMo = VideoDetailMo();
+   VideoDetailModel videoDetailMo = VideoDetailModel();
   late VideoModel videoModel;
   List<VideoModel> videoList = [];
   @override
@@ -42,7 +42,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
     changeStatusBar(
         color: Colors.black, statusStyle: StatusStyle.LIGHT_CONTENT);
     _tabController = TabController(length: tabs.length, vsync: this);
-    videoModel = widget.videoMo;
+    videoModel = widget.videoModel;
     _loadDetail();
   }
 
@@ -171,7 +171,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
   //加载详情数据
   void _loadDetail() async {
     try {
-      VideoDetailMo result = await VideoDetailDao.get(videoModel.vid ?? '');
+      VideoDetailModel result = await VideoDetailDao.get(videoModel.vid ?? '');
       setState(() {
         videoDetailMo = result;
         if (videoDetailMo.videoInfo != null) {

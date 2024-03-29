@@ -125,11 +125,16 @@ class HiNavigator extends _RouteJumpListener {
     }
     Log().info("hi_Navigator:current:${current.page}");
     Log().info("hi_Navigator:pre:${_current?.page}");
-    _listeners.forEach((listener) {
-      listener(current,
-          _current ?? RouteStatusInfo(RouteStatus.unknown, const Center()));
+     _listeners.forEach((listener) {
+      listener(current, _current!);
     });
     _current = current;
+    
+    // _listeners.forEach((listener) {
+    //   listener(current,
+    //       _current ?? RouteStatusInfo(RouteStatus.unknown, const Center()));
+    // });
+    // _current = current;
   }
 }
 

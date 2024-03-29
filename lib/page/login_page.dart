@@ -94,6 +94,7 @@ class _LoginPageState extends State<LoginPage> {
         showWarnToast(result['msg']);
       }
     } on NeedLogin catch (e) {
+
        showWarnToast(e.message);
     } on NeedAuth catch (e) {
         showWarnToast(e.message);

@@ -173,7 +173,7 @@ class _RegistrationPageState extends State<RegistrationPage> {
       tips = '请输入订单号后四位';
     }
     if (tips != null) {
-      Log().info(tips);
+      print(tips);
        showWarnToast(tips);
       return;
     }
