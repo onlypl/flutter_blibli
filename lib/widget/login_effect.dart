@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class LoginEffect extends StatefulWidget {
   const LoginEffect({
-    Key? key,
+    super.key,
     required this.protect,
-  }) : super(key: key);
+  });
   final bool protect;
   @override
   State<LoginEffect> createState() => _LoginEffectState();

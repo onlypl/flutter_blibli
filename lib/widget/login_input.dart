@@ -5,7 +5,7 @@ import '../util/log.dart';
 
 class LoginInput extends StatefulWidget {
   const LoginInput({
-    Key? key,
+    super.key,
     required this.title,
     required this.hint,
     this.onChanged, 
@@ -13,7 +13,7 @@ class LoginInput extends StatefulWidget {
     this.lineStretch = false, 
     this.obsureText = false, 
     this.keyboardType,
-  }) : super(key: key);
+  });
   final String title;   //标题
   final String hint;    //提示
   final ValueChanged<String>? onChanged; //文本发生改变监听

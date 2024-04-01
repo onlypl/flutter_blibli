@@ -41,8 +41,6 @@ class _HomePageState extends HiState<HomePage>
   bool _isloading = true;
   late Widget _currentPage;
   @override
-  HomePage get widget => super.widget;
-  @override
   void initState() {
     super.initState();
     WidgetsBinding.instance.addObserver(this);

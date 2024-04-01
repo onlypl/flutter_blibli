@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 
 import '../util/log.dart';
 
-typedef RouteChangeListener(RouteStatusInfo current, RouteStatusInfo pre);
+typedef RouteChangeListener = Function(RouteStatusInfo current, RouteStatusInfo pre);
 
 /// 创建页面
 MaterialPage pageWrap(Widget child) {
@@ -125,9 +125,9 @@ class HiNavigator extends _RouteJumpListener {
     }
     Log().info("hi_Navigator:current:${current.page}");
     Log().info("hi_Navigator:pre:${_current?.page}");
-     _listeners.forEach((listener) {
+     for (var listener in _listeners) {
       listener(current, _current!);
-    });
+    }
     _current = current;
     
     // _listeners.forEach((listener) {

@@ -56,6 +56,8 @@ dependencies:
   chewie: ^1.7.5     #基于video_payer封装的播放器
   flutter_screenutil: ^5.9.0 #适配屏幕和字体大小的flutter插件。让你的UI在不同的屏幕尺寸上显示合理的布局
 
+  provider: any
+  shared_preferences: any
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -67,8 +69,7 @@ dev_dependencies:
   # rules and activating additional ones.
   flutter_lints: ^3.0.0
   json_serializable: ^6.7.1 #数据模型序列化 json_annotation,build_runner使用
-  build_runner: ^2.4.8    #代码生成和模块化编译 json_annotation,json_serializable使用
-  shared_preferences: ^2.2.2 #轻量级数据存储 数据异步持久化
+  build_runner: ^2.4.8 #轻量级数据存储 数据异步持久化
   
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

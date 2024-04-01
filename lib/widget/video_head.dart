@@ -44,9 +44,10 @@ class VideoHead extends StatelessWidget {
   Row _userInfo() {
     return Row(
           children: [
-            ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.network(owner?.face ?? "", width: 30, height: 30),
+            SizedBox(
+              height: 30,
+              width: 30,
+              child:Image.network(owner?.face ?? "", width: 30, height: 30)
             ),
             Padding(
               padding: const EdgeInsets.only(left: 8),

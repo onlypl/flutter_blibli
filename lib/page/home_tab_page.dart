@@ -21,7 +21,8 @@ class HomTabPage extends StatefulWidget {
   State<HomTabPage> createState() => _HomTabPageState();
 }
 
-class _HomTabPageState extends HiBaseTabState<HomeModel, VideoModel, HomTabPage> {
+class _HomTabPageState
+    extends HiBaseTabState<HomeModel, VideoModel, HomTabPage> {
   @override
   void initState() {
     super.initState();
@@ -30,13 +31,12 @@ class _HomTabPageState extends HiBaseTabState<HomeModel, VideoModel, HomTabPage>
   }
 
   _banner(List<BannerModel> bannerList) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 8, right: 8, top: 10),
-      child: HiBanner(bannerList: bannerList),
+    return HiBanner(
+      bannerList: bannerList,
+      panding: const EdgeInsets.only(left: 5, right: 5, top: 10),
     );
   }
-  
-  
+
   _videoItemListView() {
     return GridView.builder(
         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
@@ -56,23 +56,23 @@ class _HomTabPageState extends HiBaseTabState<HomeModel, VideoModel, HomTabPage>
 
   @override
   get contentChild => ListView(
-          physics: const AlwaysScrollableScrollPhysics(), //页面数量不足无法滚动告诉列表允许滚动
-          controller: scrollController,
-          children: [
-            Column(
-              children: [
-                if (widget.bannerList != null) _banner(widget.bannerList!),
-                _videoItemListView(), //视频列表
-              ],
-            ),
-          ],
-        );
+        physics: const AlwaysScrollableScrollPhysics(), //页面数量不足无法滚动告诉列表允许滚动
+        controller: scrollController,
+        children: [
+          Column(
+            children: [
+              if (widget.bannerList != null) _banner(widget.bannerList!),
+              _videoItemListView(), //视频列表
+            ],
+          ),
+        ],
+      );
 
   @override
-  Future<HomeModel> getData(int pageIndex) async{
-      HomeModel result = await HomeDao.get(widget.categoryName ?? '',
-          pageIndex: pageIndex, pageSize: 10);
-          return result;
+  Future<HomeModel> getData(int pageIndex) async {
+    HomeModel result = await HomeDao.get(widget.categoryName ?? '',
+        pageIndex: pageIndex, pageSize: 10);
+    return result;
   }
 
   @override

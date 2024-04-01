@@ -36,12 +36,12 @@ class _HiBannerState extends State<HiBanner> {
     return Swiper(
       pagination: const SwiperPagination(
         alignment: Alignment.bottomRight,
-        margin: EdgeInsets.only(right: 5, bottom: 10),
+        margin: EdgeInsets.only(right: 15, bottom: 10),
         builder: DotSwiperPaginationBuilder(
             color: Colors.grey,
             activeColor: primary,
-            size: 10,
-            activeSize: 10,
+            size: 5,
+            activeSize: 8,
             space: 3),
       ),
       itemCount: widget.bannerList.length,

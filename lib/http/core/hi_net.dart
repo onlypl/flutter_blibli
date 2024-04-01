@@ -5,7 +5,6 @@ import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/core/hi_net_adapter.dart';
 import 'package:blibli/http/request/base_request.dart';
 import 'package:blibli/util/log.dart';
-import 'package:blibli/util/toast.dart';
 
 /// 1.支持网络库插拔设计，且不干扰业务层
 /// 2.基于配置请求请求，简洁易用

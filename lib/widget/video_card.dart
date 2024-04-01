@@ -22,7 +22,7 @@ class VideoCard extends StatelessWidget {
         HiNavigator.getInstance().onJumpTo(RouteStatus.detail,args: {"videoModel":videoModel});
       },
       child: SizedBox(
-        height: 200,
+        height: 100,
         child: Card(
           margin: const EdgeInsets.only(left: 0, right: 0, bottom: 0, top: 0),
           child: ClipRRect(//圆角
@@ -47,7 +47,7 @@ class VideoCard extends StatelessWidget {
       children: [
         cachedImage(videoModel.cover ?? "",
         width: (size.width - 30) / 2,
-        height: 120
+        height: 100
         ),
         Positioned(
             left: 0,

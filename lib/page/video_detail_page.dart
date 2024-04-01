@@ -72,7 +72,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
                       children: [
                         _buildDetailList(),
                         Container(
-                          child: Text('尽情期待'),
+                          child: const Text('尽情期待'),
                         )
                       ],
                     ),

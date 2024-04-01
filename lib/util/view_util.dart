@@ -1,18 +1,17 @@
-import 'dart:io';
-import 'dart:ui';
 
 import 'package:blibli/util/format_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 
 import '../widget/navigantion_bar.dart';
+import 'esoImage_cache_manager.dart';
 
 ///带缓存的image
 Widget cachedImage(String imageUrl, {double? width, double? height}) {
   return CachedNetworkImage(
     imageUrl: imageUrl,
+    cacheManager: EsoImageCacheManager(),
     width: width,
     height: height,
     fit: BoxFit.cover,

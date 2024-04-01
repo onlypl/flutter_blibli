@@ -1,11 +1,7 @@
-import 'package:blibli/http/core/hi_base_tab_state.dart';
-import 'package:blibli/http/dao/ranking_dao.dart';
-import 'package:blibli/model/ranking_model.dart';
 import 'package:blibli/page/ranking_tab_page.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/hi_tab.dart';
 import 'package:blibli/widget/navigantion_bar.dart';
-import 'package:blibli/widget/video_large_card.dart';
 import 'package:flutter/material.dart';
 
 //排行榜
