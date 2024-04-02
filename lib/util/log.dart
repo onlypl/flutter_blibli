@@ -25,7 +25,7 @@ class PLogFilter extends LogFilter {
   @override
   bool shouldLog(LogEvent event) {
     if (kReleaseMode) {
-      return event.level.index >= Level.info.index;
+      return event.level.index == Level.info.index;
     } else {
       return true;
     }

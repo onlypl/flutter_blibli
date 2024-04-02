@@ -12,17 +12,19 @@ class DioAdapter extends HiNetAdapter {
   @override
   Future<HiNetResponse<T>> send<T>(BaseRequest request) async {
     var response, options = Options(headers: request.header);
+   Dio dio = Dio();
     var error;
     try {
       if (request.httpMethod() == HttpMethod.GET) {
-        response = await Dio().get(request.url(), options: options);
+        response = await dio.get(request.url(), options: options);
       } else if (request.httpMethod() == HttpMethod.POST) {
-        response = await Dio()
+        response = await dio
             .post(request.url(), data: request.params, options: options);
       } else if (request.httpMethod() == HttpMethod.DELETE) {
-        response = await Dio()
+        response = await dio
             .delete(request.url(), data: request.params, options: options);
       }
+
     } on DioException catch (e) {
       error = e;
       response = e.response;

@@ -1,11 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/view_util.dart';
-import 'package:flutter/material.dart';
 import 'package:chewie/chewie.dart'; //隐藏三方的播放控制器
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
+
+import 'package:blibli/util/color.dart';
+import 'package:blibli/util/view_util.dart';
+
 import 'hi_video_controls.dart';
 
 //播放器组件
@@ -16,14 +18,16 @@ class VideoView extends StatefulWidget {
   final bool looping; //是否循环播放
   final double aspectRatio; //宽/高缩放比例
   final Widget? overlayUI;
+  final Widget? barrageUI; //弹幕UI
   const VideoView({
     super.key,
     required this.url,
     this.cover,
     this.autoPlay = true,
     this.looping = false,
-    this.aspectRatio = 16 / 9, 
+    this.aspectRatio = 16 / 9,
     this.overlayUI,
+    this.barrageUI,
   });
 
   @override
@@ -49,7 +53,9 @@ class _VideoViewState extends State<VideoView> {
     super.initState();
     //初始化播放器设置
     _videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(widget.url));
+        VideoPlayerController.networkUrl(
+        //  Uri.parse(widget.url));
+          Uri.parse('https://vjs.zencdn.net/v/oceans.mp4'));      
     _chewieController = ChewieController(
      // allowedScreenSleep: true,
       videoPlayerController: _videoPlayerController,
@@ -65,6 +71,7 @@ class _VideoViewState extends State<VideoView> {
           showBigPlayIcon: false,
           bottomGradient: blackLinearGradient(fromTop: false),
           overlayUI: widget.overlayUI,
+          barrageUI: widget.barrageUI,
       ),
       materialProgressColors: _progressColors
     );

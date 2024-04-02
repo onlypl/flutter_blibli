@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 
 //主色调
@@ -19,3 +21,14 @@ const MaterialColor white = MaterialColor(
     900: Color(0xFFFFFFFF),
   },
 );
+
+
+///随机色
+Color randomColor() {
+  return Color.fromARGB(
+    255, // 不透明度（0到255）
+    Random().nextInt(255), // 红色（0到255）
+    Random().nextInt(255), // 绿色（0到255）
+    Random().nextInt(255), // 蓝色（0到255）
+  );
+}

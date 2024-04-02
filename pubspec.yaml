@@ -55,6 +55,9 @@ dependencies:
   video_player: ^2.8.3 #官方播放器插件
   chewie: ^1.7.5     #基于video_payer封装的播放器
   flutter_screenutil: ^5.9.0 #适配屏幕和字体大小的flutter插件。让你的UI在不同的屏幕尺寸上显示合理的布局
+  web_socket_channel: ^2.4.4 #弹幕插件
+  flutter_overlay: ^1.0.0   #评论输入浮层
+
 
   provider: any
   shared_preferences: any
