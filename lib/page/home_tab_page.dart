@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import '../http/core/hi_base_tab_state.dart';
 import '../http/dao/home_dao.dart';
 import '../model/video_model.dart';
-import '../util/log.dart';
+import 'package:hi_base/log.dart';
 
 class HomTabPage extends StatefulWidget {
   final String? categoryName;

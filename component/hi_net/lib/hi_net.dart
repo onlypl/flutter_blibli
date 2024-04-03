@@ -1,5 +1,6 @@
 library hi_net;
 
+import 'package:hi_base/log.dart';
 import 'package:logger/web.dart';
 
 import 'core/dio_adapter.dart';
@@ -29,13 +30,13 @@ class HiNet {
       error = e;
       response = e.data;
     } catch (e) {
-       Logger().e('错误:${e.toString()}');
+       Log().error('错误:${e.toString()}');
       error = e;
     }
 
     var result = response?.data;
-    Logger().d('请求结果:$result');
-     Logger().d('请求到结果------------------');
+    Log().debug('请求结果:$result');
+     Log().debug('请求到结果------------------');
    var status = response?.statusCode;
      switch (status) {
       case 200:
@@ -51,7 +52,7 @@ class HiNet {
   }
 
   Future<dynamic> send<T>(HiBaseRequest request) async {
-    Logger().d('i_net:url:${request.url()}');
+    Log().debug('i_net:url:${request.url()}');
     //使用Dio发送请求
     HiNetAdapter adapter = DioAdapter();
     return adapter.send(request);

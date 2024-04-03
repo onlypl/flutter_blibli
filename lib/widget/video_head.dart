@@ -1,8 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/format_util.dart';
+import 'package:hi_base/color.dart';
+import 'package:hi_base/format_util.dart';
 
 import '../model/video_model.dart';
 

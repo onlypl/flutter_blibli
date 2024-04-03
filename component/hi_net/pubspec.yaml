@@ -1,6 +1,10 @@
 name: hi_net
 description: "A new Flutter package project."
 version: 0.0.1
+# 下面这行代码防止包被意外发布到
+# pub.dev使用pub publish。这是私有包的首选。
+#如果你想发布到pub.dev，请删除publish_to: none
+publish_to: none
 homepage:
 
 environment:
@@ -10,8 +14,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  hi_base:
+    path: ../hi_base
   dio: ^5.4.1
-  logger: ^2.1.0        #log日志打印
   
 dev_dependencies:
   flutter_test:

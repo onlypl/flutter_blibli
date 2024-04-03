@@ -1,7 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
+import 'package:hi_base/log.dart';
 import 'package:web_socket_channel/io.dart';
 
 import 'barrage_model.dart';
@@ -22,7 +21,7 @@ class HiSocket implements ISocket {
        headers: headers, 
        pingInterval: Duration(seconds: _intervalSeconds));
        _channel?.stream.handleError((error){
-         print('webSocket连接发生错误:$error');
+         Log().debug('webSocket连接发生错误:$error');
        }).listen((message) {
            _headerMessage(message);
        });
@@ -49,7 +48,7 @@ class HiSocket implements ISocket {
   }
   //处理服务端返回数据
   void _headerMessage(message) {
-     print('webSocket:received:$message');
+     Log().debug('webSocket:received:$message');
      var result = BarrageModel.fromJsonString(message);
      if(_channel!=null && _callBack != null){
         _callBack!(result);

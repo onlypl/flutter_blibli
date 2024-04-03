@@ -1,4 +1,4 @@
-name: hi_barrage
+name: hi_base
 description: "A new Flutter package project."
 version: 0.0.1
 homepage:
@@ -10,10 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  hi_base:
-    path: ../hi_base
-    
-  web_socket_channel: ^2.4.4 #webSocket插件
+  intl: ^0.19.0   #国际化和本地化设施，包括消息翻译、复数和性别、日期/数字格式和解析以及双向文本
+  logger: ^2.1.0        #log日志打印
+  cached_network_image: ^3.3.1  #图片缓存
 dev_dependencies:
   flutter_test:
     sdk: flutter

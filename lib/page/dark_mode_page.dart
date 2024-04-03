@@ -1,5 +1,5 @@
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/color.dart';
+import 'package:hi_base/color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';

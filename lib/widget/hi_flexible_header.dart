@@ -1,10 +1,8 @@
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/log.dart';
+import 'package:hi_base/log.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-
-import '../util/view_util.dart';
+import 'package:hi_base/view_util.dart';
 
 ///可动态改变位置的header组件
 ///性能优化：局部刷新的应用@刷新原理

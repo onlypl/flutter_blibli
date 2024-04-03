@@ -1,4 +1,5 @@
 // ignore_for_file: constant_identifier_names, prefer_typing_uninitialized_variables, avoid_print
+import 'package:hi_base/log.dart';
 import 'package:logger/web.dart';
 
 enum HttpMethod { GET, POST, DELETE }
@@ -32,7 +33,7 @@ abstract class HiBaseRequest {
     } else {
       uri = Uri.http(autority(), pathStr, params);
     }
-    Logger().d('url地址:${uri.toString()}');
+    Log().debug('url地址:${uri.toString()}');
     return uri.toString();
   }
 

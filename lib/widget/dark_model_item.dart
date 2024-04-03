@@ -1,7 +1,6 @@
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/view_util.dart';
+import 'package:hi_base/color.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

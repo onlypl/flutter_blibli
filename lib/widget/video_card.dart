@@ -1,16 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:blibli/navigator/hi_navigator.dart';
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/format_util.dart';
-import 'package:blibli/util/view_util.dart';
+import 'package:hi_base/view_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hi_base/format_util.dart';
+import 'package:hi_base/log.dart';
 import 'package:provider/provider.dart';
 import '../model/video_model.dart';
 import '../provider/theme_provider.dart';
-import '../util/log.dart';
-
 class VideoCard extends StatelessWidget {
   final VideoModel videoModel;
   const VideoCard({

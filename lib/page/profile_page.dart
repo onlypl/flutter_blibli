@@ -1,8 +1,8 @@
 
 import 'package:blibli/http/dao/profile_dao.dart';
 import 'package:blibli/model/profile_model.dart';
-import 'package:blibli/util/log.dart';
-import 'package:blibli/util/view_util.dart';
+import 'package:hi_base/log.dart';
+import 'package:hi_base/view_util.dart';
 import 'package:blibli/widget/benefit_card.dart';
 import 'package:blibli/widget/course_card.dart';
 import 'package:blibli/widget/dark_model_item.dart';

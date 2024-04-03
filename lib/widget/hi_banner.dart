@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:blibli/navigator/hi_navigator.dart';
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/log.dart';
+import 'package:hi_base/color.dart';
+import 'package:hi_base/log.dart';
 import 'package:card_swiper/card_swiper.dart';
 import 'package:flutter/material.dart';
 import '../model/home_model.dart';

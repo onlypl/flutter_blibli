@@ -4,12 +4,9 @@ import 'package:chewie/chewie.dart'; //隐藏三方的播放控制器
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
-
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/view_util.dart';
-
+import 'package:hi_base/color.dart';
 import 'hi_video_controls.dart';
-
+import 'package:hi_base/view_util.dart';
 //播放器组件
 class VideoView extends StatefulWidget {
   final String url; //视频url

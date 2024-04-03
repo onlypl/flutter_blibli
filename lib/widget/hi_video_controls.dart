@@ -8,10 +8,9 @@ import 'package:chewie/src/material/material_progress_bar.dart';
 import 'package:chewie/src/models/subtitle_model.dart';
 import 'package:chewie/src/notifiers/index.dart';
 import 'package:flutter/material.dart';
+import 'package:hi_base/color.dart';
 import 'package:provider/provider.dart';
 import 'package:video_player/video_player.dart';
-
-import '../util/color.dart';
 
 /// 自定义播放器UI
 /// 支持空安全的皮肤，for chewie: > ^1.2.2

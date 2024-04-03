@@ -1,12 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'dart:ui';
-
 import 'package:blibli/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:hi_base/color.dart';
 import 'package:provider/provider.dart';
 import 'package:underline_indicator/underline_indicator.dart';
-
-import '../util/color.dart';
 //分类切换组件
 class HiTab extends StatelessWidget {
   final List<Widget> tabs;

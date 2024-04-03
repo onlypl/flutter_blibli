@@ -7,7 +7,7 @@ import 'package:blibli/page/registration_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:flutter/material.dart';
 
-import '../util/log.dart';
+import 'package:hi_base/log.dart';
 
 typedef RouteChangeListener = Function(RouteStatusInfo current, RouteStatusInfo pre);
 

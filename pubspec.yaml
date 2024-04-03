@@ -35,18 +35,20 @@ dependencies:
     path: ./component/hi_net
   hi_barrage:
     path: ./component/hi_barrage
+  hi_base:
+    path: ./component/hi_base
+    
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.6
   json_annotation: ^4.8.1  #创建数据模型配合json_serializable,build_runner使用
   fluttertoast: ^8.2.4      #Toast提示
   underline_indicator: ^0.0.4 #指示器
-  logger: ^2.1.0        #log日志打印
   card_swiper: ^3.0.1  #轮播图
   status_bar_control: ^3.2.1 #状态栏控件，可让您控制 iOS 和 Android 上的状态栏颜色、样式（主题）、可见性和半透明属性。
   flutter_staggered_grid_view: ^0.7.0 #瀑布流
   transparent_image: ^2.0.1 #淡入淡出图片
-  cached_network_image: ^3.3.1  #图片缓存
+  #cached_network_image: ^3.3.1  #图片缓存
   lottie: ^3.1.0 #json动画
   animations: ^2.0.11  #容器转场动画
   pull_to_refresh: ^2.0.0 #上下拉刷新

@@ -5,7 +5,7 @@ import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/provider/hi_provider.dart';
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/color.dart';
+import 'package:hi_base/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:blibli/navigator/hi_navigator.dart';

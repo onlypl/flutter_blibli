@@ -1,6 +1,6 @@
 import 'package:blibli/model/profile_model.dart';
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/view_util.dart';
+import 'package:hi_base/view_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';

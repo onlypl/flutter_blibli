@@ -1,9 +1,10 @@
-// ignore_for_file: avoid_print
+// ignore_for_file: avoid_Log().debug
 
 import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:hi_base/log.dart';
 
 import 'barrage_item.dart';
 import 'barrage_model.dart';
@@ -100,19 +101,19 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
   @override
   void play() {
     _barrageStatus = BarrageStatus.play;
-    print('播放弹幕');
+    Log().debug('播放弹幕');
     if (_timer != null && (_timer?.isActive ?? false)) return;
     //每间隔一段时间发送一次弹幕
     _timer = Timer.periodic(Duration(milliseconds: widget.speed), (timer) {
-      print('启动发送弹幕');
+      Log().debug('启动发送弹幕');
       if (_barrageList.isNotEmpty) {
         //将取出发送的弹幕并从集合中移除
         var temp = _barrageList.removeAt(0);
         addBarrage(temp);
-        print('发送弹幕:${temp.content}');
+        Log().debug('发送弹幕:${temp.content}');
       } else {
         //弹幕没有数据了,关闭定时器
-         print('弹幕没有数据了,关闭定时器');
+         Log().debug('弹幕没有数据了,关闭定时器');
         _timer?.cancel();
       }
     });
@@ -142,7 +143,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
     _barrageStatus = BarrageStatus.pause; //状态改变
     _barrageItemList.clear(); //清除屏幕弹幕
     setState(() {});
-    print('暂停发送弹幕');
+    Log().debug('暂停发送弹幕');
     _timer?.cancel(); //关闭定时器
   }
 
@@ -155,7 +156,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
   }
   //
   void _onComplete(id) {
-    print('播放完毕:$id');
+    Log().debug('播放完毕:$id');
     //弹幕播放完毕将其从弹幕widget集合中删除
     _barrageItemList.removeWhere((element) => element.id == id);
   }

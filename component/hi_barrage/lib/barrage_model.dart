@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:hi_base/log.dart';
+
 class BarrageModel {
   late String content;
   late String vid;
@@ -31,7 +33,7 @@ class BarrageModel {
   static List<BarrageModel> fromJsonString(json) {
     List<BarrageModel> list = [];
     if (json is! String || !json.startsWith('[')) {
-      print('json is not invalid');
+      Log().debug('json is not invalid');
       return [];
     }
 

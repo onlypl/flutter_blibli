@@ -1,13 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:blibli/util/color.dart';
-import 'package:blibli/util/format_util.dart';
+import 'package:hi_base/color.dart';
+import 'package:hi_base/format_util.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
 
 import 'package:blibli/model/video_detail_model.dart';
 
 import '../model/video_model.dart';
-
+import 'package:hi_base/view_util.dart';
 ///视频点赞分享收藏等工具栏
 class VideoToolBar extends StatefulWidget {
   final VideoDetailModel detailMo;

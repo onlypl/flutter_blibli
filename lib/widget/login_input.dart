@@ -1,7 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:blibli/util/color.dart';
+import 'package:hi_base/color.dart';
 import 'package:flutter/material.dart';
-import '../util/log.dart';
+import 'package:hi_base/log.dart';
 
 class LoginInput extends StatefulWidget {
   const LoginInput({

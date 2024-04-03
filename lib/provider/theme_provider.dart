@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import 'package:blibli/db/hi_cache.dart';
-import 'package:blibli/util/color.dart';
+import 'package:hi_base/color.dart';
 import 'package:blibli/util/hi_constants.dart';
 
 extension ThemeModeExtension on ThemeMode {

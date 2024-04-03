@@ -1,6 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:blibli/util/log.dart';
-import 'package:blibli/util/view_util.dart';
+import 'package:hi_base/log.dart';
+import 'package:hi_base/view_util.dart';
 import 'package:flutter/material.dart';
 import '../model/video_model.dart';
 

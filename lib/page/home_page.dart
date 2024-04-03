@@ -1,10 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
 
-import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/page/profile_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/provider/theme_provider.dart';
-import 'package:blibli/util/log.dart';
+import 'package:hi_base/log.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/hi_tab.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +12,7 @@ import 'package:blibli/model/home_model.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/widget/navigantion_bar.dart';
+import 'package:hi_base/hi_state.dart';
 import 'package:hi_net/core/hi_error.dart';
 import 'package:provider/provider.dart';
 
