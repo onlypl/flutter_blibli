@@ -1,5 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 import 'package:blibli/navigator/hi_navigator.dart';
+import 'package:blibli/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/dao/login_dao.dart';
@@ -9,6 +10,7 @@ import 'package:blibli/widget/appbar.dart';
 import 'package:blibli/widget/login_button.dart';
 import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
+import 'package:provider/provider.dart';
 
 import '../util/log.dart';
 
@@ -30,6 +32,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: appbar('登录', '注册', () {
+    //    context.read<ThemeProvider>().setTheme(ThemeMode.dark);
         HiNavigator.getInstance().onJumpTo(RouteStatus.registration);
       }),
       body: Container(

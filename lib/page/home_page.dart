@@ -1,6 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_unnecessary_containers, avoid_print
 
+import 'package:blibli/page/profile_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
+import 'package:blibli/provider/theme_provider.dart';
 import 'package:blibli/util/log.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/hi_tab.dart';
@@ -13,6 +15,7 @@ import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/widget/navigantion_bar.dart';
+import 'package:provider/provider.dart';
 
 import '../widget/loading_container.dart';
 
@@ -54,14 +57,9 @@ class _HomePageState extends HiState<HomePage>
         Log().info('首页:onPause');
       }
       //当页面返回到首页恢复首页的状态栏样式
-      if (current.page is HomePage) {
-        //首页状态栏颜色
-        Log().info('!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!');
-        changeStatusBar(
-            color: Colors.white, statusStyle: StatusStyle.LIGHT_CONTENT);
-      } else {
-        changeStatusBar(
-            color: Colors.black, statusStyle: StatusStyle.DARK_CONTENT);
+      if (pre?.page is VideoDetailPage && current.page is! ProfilePage) {
+        var statusStyle = StatusStyle.DARK_CONTENT;
+        changeStatusBar(color: Colors.white, statusStyle: statusStyle);
       }
     });
     loadData();
@@ -75,7 +73,12 @@ class _HomePageState extends HiState<HomePage>
 
     super.dispose();
   }
-
+  ///监听系统DarkMode主题变化
+ @override
+  void didChangePlatformBrightness() {
+    context.read<ThemeProvider>().darModeChange(context);
+    super.didChangePlatformBrightness();
+  }
   ///监听生命周期变化
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
@@ -87,7 +90,7 @@ class _HomePageState extends HiState<HomePage>
       case AppLifecycleState.resumed: //后台切换前台 页面可见
         //fix android压后台，状态栏字体颜色变白的问题
         if (_currentPage is! VideoDetailPage) {
-          changeStatusBar(
+          changeStatusBar( 
               color: Colors.white, statusStyle: StatusStyle.DARK_CONTENT);
         }
         break;
@@ -115,14 +118,14 @@ class _HomePageState extends HiState<HomePage>
             //沉侵导航栏
             height: 50,
             child: _appBar(),
-            color: primary,
+       //     color: primary,
             statusStyle: StatusStyle.LIGHT_CONTENT,
           ),
           Container(
             //顶部选项卡容器
             //color: Colors.white,
             child: _tabBar(),
-            decoration: bottomBoxShadow(),
+            decoration: bottomBoxShadow(context),
           ),
           Flexible(
               //子控件TabBarView充满父控件
@@ -229,13 +232,13 @@ class _HomePageState extends HiState<HomePage>
           ),
           const Icon(
             Icons.explore_outlined,
-            color: Colors.white,
+            color: Colors.grey,
           ),
           const Padding(
             padding: EdgeInsets.only(left: 12),
             child: Icon(
               Icons.mail_outline,
-              color: Colors.white,
+              color: Colors.grey,
             ),
           ),
         ],

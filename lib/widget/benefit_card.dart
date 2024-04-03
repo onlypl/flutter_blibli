@@ -2,6 +2,9 @@ import 'package:blibli/model/profile_model.dart';
 import 'package:blibli/widget/hi_blur.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+
+import '../provider/theme_provider.dart';
 
 class BenefitCartd extends StatelessWidget {
   final List<BenefitModel> benefitList;
@@ -13,28 +16,31 @@ class BenefitCartd extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 5, top: 5),
       child: Column(
         children: [
-          _buildTitle(),
+          _buildTitle(context),
           _buildBenefitList(context),
         ],
       ),
     );
   }
 
-  _buildTitle() {
+  _buildTitle(BuildContext context) {
+     var themeProvider =  context.watch<ThemeProvider>();
+     Color titleColor = themeProvider.isDark(context)?Colors.white70 :Colors.black87;
+      Color subTitleColor = themeProvider.isDark(context)? Colors.white54:Colors.black45;
     return Container(
       padding: const EdgeInsets.only(bottom: 5),
-      child: const Row(
+      child:  Row(
         children: [
           Text(
             '增值服务',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: Colors.black87),
+                color:titleColor),
           ),
-          SizedBox(width: 10),
-          Text('购买后登录XXz再次点击打开',
-              style: TextStyle(fontSize: 14, color: Colors.black45)),
+          const SizedBox(width: 10),
+          Text('购买后登录官网再次点击打开',
+              style: TextStyle(fontSize: 14, color:subTitleColor)),
         ],
       ),
     );

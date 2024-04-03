@@ -1,10 +1,14 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 
 import 'package:blibli/navigator/hi_navigator.dart';
+import 'package:blibli/util/color.dart';
 import 'package:blibli/util/format_util.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import '../model/video_model.dart';
+import '../provider/theme_provider.dart';
 import '../util/log.dart';
 
 class VideoCard extends StatelessWidget {
@@ -16,14 +20,18 @@ class VideoCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeProvider themeProvider = context.watch<ThemeProvider>();
+   Color titleColor =  themeProvider.isDark(context)?Colors.white70:Colors.black87;
+    Color nameColor =  themeProvider.isDark(context)?Colors.white54:Colors.black54;
     return InkWell(
       onTap: () {
         Log().info(videoModel.url);
         HiNavigator.getInstance().onJumpTo(RouteStatus.detail,args: {"videoModel":videoModel});
       },
       child: SizedBox(
-        height: 100,
+        //height: 100,
         child: Card(
+         // color: Colors.black54,
           margin: const EdgeInsets.only(left: 0, right: 0, bottom: 0, top: 0),
           child: ClipRRect(//圆角
             borderRadius: BorderRadius.circular(5),
@@ -31,7 +39,7 @@ class VideoCard extends StatelessWidget {
               children: [
                 _itemImage(context),
                 _infoText(
-                    videoModel.title, videoModel.owner?.face, videoModel.owner?.name),
+                    videoModel.title, videoModel.owner?.face, videoModel.owner?.name,titleColor,nameColor),
               ],
             ),
           ),
@@ -46,8 +54,8 @@ class VideoCard extends StatelessWidget {
     return Stack(
       children: [
         cachedImage(videoModel.cover ?? "",
-        width: (size.width - 30) / 2,
-        height: 100
+        width: ((size.width - 30) / 2).w,
+        height: 100.w
         ),
         Positioned(
             left: 0,
@@ -97,7 +105,7 @@ class VideoCard extends StatelessWidget {
   }
 
   ///视频信息
-  _infoText(String? title, String? url, String? name) {
+  _infoText(String? title, String? url, String? name,Color titleColor,Color nameColor) {
     return Expanded(
         //填充剩余
         child: Container(
@@ -111,16 +119,16 @@ class VideoCard extends StatelessWidget {
             title ?? "",
             maxLines: 2,
             overflow: TextOverflow.ellipsis, //无法显示则显示...
-            style: const TextStyle(fontSize: 14, color: Colors.black87),
+            style:  TextStyle(fontSize: 14, color:titleColor),
           ),
-          _owner(url, name) //用户信息
+          _owner(url, name,nameColor) //用户信息
         ],
       ),
     ));
   }
 
   ///头像+用户名信息+更多按钮
-  _owner(String? url, String? name) {
+  _owner(String? url, String? name,Color nameColor) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween, //头像+用户名 和 更多 各两边
       children: [
@@ -137,7 +145,7 @@ class VideoCard extends StatelessWidget {
               padding: const EdgeInsets.only(left: 8),
               child: Text(
                 name ?? "",
-                style: const TextStyle(fontSize: 12, color: Colors.black54),
+                style: TextStyle(fontSize: 12, color:nameColor),
               ),
             )
           ],

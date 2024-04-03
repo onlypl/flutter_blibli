@@ -3,14 +3,18 @@
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/page/video_detail_page.dart';
+import 'package:blibli/provider/hi_provider.dart';
+import 'package:blibli/provider/theme_provider.dart';
 import 'package:blibli/util/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/login_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'http/dao/login_dao.dart';
 import 'model/video_model.dart';
+import 'page/dark_mode_page.dart';
 import 'page/registration_page.dart';
 
 void main() {
@@ -39,31 +43,28 @@ class _BiliAppState extends State<BiliApp> {
                 )
               : const Scaffold(
                   body: Center(child: CircularProgressIndicator()));
-          return ScreenUtilInit(
-            designSize: const Size(360, 690), //设置设计稿尺寸
-            minTextAdapt: true,   //最小文本适应
-            splitScreenMode: true,    //支持分屏尺寸
-            builder: (context, child) {
-              return MaterialApp(
-                home: widget, //主页面
-                theme: ThemeData(
-                  primaryColor: primary,
-                  cardTheme: const CardTheme(
-                      //card默认颜色
-                      color: Colors.white),
-                  // colorScheme: ColorScheme.fromSeed(
-                  //   seedColor: Colors.white, //主题色
-                  // )
-                  //     .copyWith(secondary: Colors.white)
-                  //     .copyWith(onPrimary: Colors.white), //次要颜色
-                  //   ColorScheme.fromSwatch(
-                  //   primarySwatch: white
-                  // ),
-                  useMaterial3: true,
-                  appBarTheme: const AppBarTheme(color: white),
-                ),
-              );
-            },
+          return MultiProvider(
+            providers: topProviders,
+            child: ScreenUtilInit(
+              designSize: const Size(360, 690), //设置设计稿尺寸
+              minTextAdapt: true, //最小文本适应
+              splitScreenMode: true, //支持分屏尺寸
+              builder: (context, child) {
+                return Consumer<ThemeProvider>(
+                    builder: (
+                  BuildContext context,
+                  ThemeProvider provider,
+                  Widget? child,
+                ) {
+                  return MaterialApp(
+                    home: widget,
+                    theme: provider.getTheme(),
+                    darkTheme: provider.getTheme(isDarkMode:true),
+                    themeMode: provider.getThemeMode(),
+                  );
+                });
+              },
+            ),
           );
         });
   }
@@ -105,13 +106,15 @@ class BiliRouteDelegate extends RouterDelegate<BiliRoutePath>
     if (routeStatus == RouteStatus.home) {
       pages.clear();
       page = pageWrap(const BottomNavigator());
-    } else if (routeStatus == RouteStatus.detail) {
-      page = pageWrap(VideoDetailPage(videoModel ?? VideoModel(vid: '-1')));
     } else if (routeStatus == RouteStatus.registration) {
       page = pageWrap(const RegistrationPage());
     } else if (routeStatus == RouteStatus.login) {
       page = pageWrap(const LoginPage());
-    }
+    }else if (routeStatus == RouteStatus.darkModel) {
+      page = pageWrap(const DarkModelPage());
+    }else if (routeStatus == RouteStatus.detail) {
+      page = pageWrap(VideoDetailPage(videoModel ?? VideoModel(vid: '-1')));
+    } 
     // 重新创建一个数组，否则pages因引用没有改变路由不会生效
     tempPages = [...tempPages, page];
     //通知路由发生变化

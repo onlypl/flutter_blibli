@@ -1,7 +1,9 @@
 import 'package:blibli/model/profile_model.dart';
+import 'package:blibli/provider/theme_provider.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 class CourseCard extends StatelessWidget {
   final List<CourseModel> courseList;
@@ -13,28 +15,31 @@ class CourseCard extends StatelessWidget {
       padding: const EdgeInsets.only(left: 10, right: 5, top: 12),
       child: Column(
         children: [
-          _buildTitle(),
+          _buildTitle(context),
           ..._buildCardList(context),
         ],
       ),
     );
   }
 
-  _buildTitle() {
+  _buildTitle(BuildContext context) {
+     var themeProvider =  context.watch<ThemeProvider>();
+     Color titleColor = themeProvider.isDark(context)?Colors.white70 :Colors.black87;
+      Color subTitleColor = themeProvider.isDark(context)? Colors.white54:Colors.black45;
     return Container(
       padding:const EdgeInsets.only(bottom: 5),
-      child: const Row(
+      child:  Row(
         children: [
           Text(
             '职场进阶',
             style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 18,
-                color: Colors.black87),
+                color: titleColor),
           ),
-          SizedBox(width: 10),
+         const SizedBox(width: 10),
           Text('带你突破技术瓶颈',
-              style: TextStyle(fontSize: 14, color: Colors.black45)),
+              style: TextStyle(fontSize: 14, color: subTitleColor)),
         ],
       ),
     );

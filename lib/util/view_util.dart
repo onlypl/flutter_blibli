@@ -1,9 +1,15 @@
 
+import 'package:blibli/navigator/hi_navigator.dart';
+import 'package:blibli/page/profile_page.dart';
+import 'package:blibli/page/video_detail_page.dart';
+import 'package:blibli/util/color.dart';
 import 'package:blibli/util/format_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:status_bar_control/status_bar_control.dart';
 
+import '../provider/theme_provider.dart';
 import '../widget/navigantion_bar.dart';
 import 'esoImage_cache_manager.dart';
 
@@ -47,7 +53,24 @@ blackLinearGradient({bool fromTop = false}) {
 ///设置沉侵状态栏
 void changeStatusBar(
     {color = Colors.white,
-    StatusStyle statusStyle = StatusStyle.DARK_CONTENT}) {
+    StatusStyle statusStyle = StatusStyle.DARK_CONTENT,BuildContext? context}) {
+      if(context !=null){
+          var themeProvider = context.watch<ThemeProvider>();
+          if(themeProvider.isDark(context)){
+            statusStyle =  StatusStyle.LIGHT_CONTENT;
+            color = HiColor.darkBg;
+          }else{
+            statusStyle =  StatusStyle.DARK_CONTENT;
+          }
+      }
+     var page = HiNavigator.getInstance().getCurrent()?.page;
+     //fix android切换 profile页面状态变白问题
+          if(page is ProfilePage){
+              color = Colors.transparent;
+          }else if(page is VideoDetailPage){
+              color = HiColor.darkBg;
+             statusStyle = StatusStyle.LIGHT_CONTENT;
+          }
   StatusBarControl.setColor(color, animated: false);
   StatusBarControl.setStyle(statusStyle == StatusStyle.DARK_CONTENT
       ? StatusBarStyle.DARK_CONTENT
@@ -97,7 +120,11 @@ SizedBox hiSpace({double height = 1 ,double width = 1}){
 }
 
 ///底部阴影
-BoxDecoration bottomBoxShadow(){
+BoxDecoration? bottomBoxShadow(BuildContext context) {
+    ThemeProvider themeProvider = context.watch();
+    if(themeProvider.isDark(context)){
+        return null;
+    }
   return BoxDecoration(color:  Colors.white,boxShadow: [
     BoxShadow(
       offset:const Offset(0, 5), //xy轴偏移量

@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_conditional_assignment, collection_methods_unrelated_type, avoid_print
 
 import 'package:blibli/navigator/bottom_navigator.dart';
+import 'package:blibli/page/dark_mode_page.dart';
 import 'package:blibli/page/login_page.dart';
 import 'package:blibli/page/registration_page.dart';
 import 'package:blibli/page/video_detail_page.dart';
@@ -35,6 +36,7 @@ enum RouteStatus {
   registration,
   home,
   detail,
+  darkModel,
   unknown
 }
 
@@ -48,7 +50,10 @@ RouteStatus getStatus(MaterialPage page) {
     return RouteStatus.home;
   } else if (page.child is VideoDetailPage) {
     return RouteStatus.detail;
+  }else if (page.child is DarkModelPage) {
+    return RouteStatus.darkModel;
   }
+  
   return RouteStatus.unknown;
 }
 
@@ -136,6 +141,15 @@ class HiNavigator extends _RouteJumpListener {
     // });
     // _current = current;
   }
+
+  // Future<bool> openH5(String url) async{
+  //   var result = await canLaunch(url);
+  //   if(result){
+  //       return await launch(url);
+  //   }else{
+  //     return Future.value(false);
+  //   }
+  // }
 }
 
 ///抽象类 提供HiNavigator实现

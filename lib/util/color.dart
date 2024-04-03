@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -22,7 +23,6 @@ const MaterialColor white = MaterialColor(
   },
 );
 
-
 ///随机色
 Color randomColor() {
   return Color.fromARGB(
@@ -31,4 +31,18 @@ Color randomColor() {
     Random().nextInt(255), // 绿色（0到255）
     Random().nextInt(255), // 蓝色（0到255）
   );
+}
+
+class HiColor {
+  static const Color red = Color(0xFFFF4759);
+  static const Color darkRed = Color(0xFFE03E4E);
+
+
+  static const Color bg = Color(0xFFFFFFFF);
+  static const Color darkBg = Color(0xFF18191A);
+
+  //根据主题设置颜色
+  Color themeColor(bool isDark,darkColor,lightColor){
+    return isDark? darkColor:lightColor;
+  }
 }

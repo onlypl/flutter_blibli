@@ -6,6 +6,7 @@ import 'package:blibli/util/log.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/benefit_card.dart';
 import 'package:blibli/widget/course_card.dart';
+import 'package:blibli/widget/dark_model_item.dart';
 import 'package:blibli/widget/hi_banner.dart';
 import 'package:blibli/widget/hi_blur.dart';
 import 'package:blibli/widget/hi_flexible_header.dart';
@@ -34,12 +35,13 @@ class _ProfilePageState extends State<ProfilePage>
   final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
+   Color primaryColor =  Theme.of(context).primaryColor;
     super.build(context);
     return Scaffold(
       body: NestedScrollView(
           controller: _scrollController,
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
-            return _buildAppBar();
+            return _buildAppBar(primaryColor);
           },
           body: ListView(
             padding: const EdgeInsets.only(top: 10),
@@ -76,9 +78,10 @@ class _ProfilePageState extends State<ProfilePage>
   }
 
   ///头部组件
-  _buildAppBar() {
+  _buildAppBar(Color primaryColor) {
     return <Widget>[
       SliverAppBar(
+        backgroundColor: primaryColor,
         //扩展高度
         expandedHeight: 160,
         //标题栏是否固定
@@ -118,6 +121,7 @@ class _ProfilePageState extends State<ProfilePage>
       _buildBanner(),
       CourseCard(courseList: model?.courseList ?? []),
       BenefitCartd(benefitList: model?.benefitList ?? []),
+      DarkModelItem(),
     ];
   }
 

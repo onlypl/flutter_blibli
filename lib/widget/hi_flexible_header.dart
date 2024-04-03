@@ -1,6 +1,8 @@
+import 'package:blibli/provider/theme_provider.dart';
 import 'package:blibli/util/log.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 
 import '../util/view_util.dart';
 
@@ -52,6 +54,8 @@ class _HiFilexibleHeaderState extends State<HiFilexibleHeader> {
 
   @override
   Widget build(BuildContext context) {
+    var themeProvider =  context.watch<ThemeProvider>();
+    Color nameColor = themeProvider.isDark(context)?Colors.white :Colors.black87;
     return Container(
       alignment: Alignment.bottomLeft,
       padding: EdgeInsets.only(left: 10, bottom:_dyBottom),
@@ -64,7 +68,7 @@ class _HiFilexibleHeaderState extends State<HiFilexibleHeader> {
           hiSpace(width: 8),
           Text(
             widget.name,
-            style: const TextStyle(fontSize: 12, color: Colors.black54),
+            style: TextStyle(fontSize: 13, color:nameColor),
           ),
         ],
       ),
