@@ -7,14 +7,13 @@ import 'package:blibli/util/log.dart';
 import 'package:blibli/util/view_util.dart';
 import 'package:blibli/widget/hi_tab.dart';
 import 'package:flutter/material.dart';
-import 'package:blibli/http/core/hi_error.dart';
-import 'package:blibli/http/core/hi_state.dart';
 import 'package:blibli/http/dao/home_dao.dart';
 import 'package:blibli/model/home_model.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/home_tab_page.dart';
-import 'package:blibli/util/color.dart';
 import 'package:blibli/widget/navigantion_bar.dart';
+import 'package:hi_net/core/hi_error.dart';
+import 'package:hi_net/core/hi_state.dart';
 import 'package:provider/provider.dart';
 
 import '../widget/loading_container.dart';

@@ -1,6 +1,5 @@
-import 'package:blibli/http/core/hi_error.dart';
+
 import 'package:blibli/http/dao/profile_dao.dart';
-import 'package:blibli/model/home_model.dart';
 import 'package:blibli/model/profile_model.dart';
 import 'package:blibli/util/log.dart';
 import 'package:blibli/util/view_util.dart';
@@ -10,8 +9,8 @@ import 'package:blibli/widget/dark_model_item.dart';
 import 'package:blibli/widget/hi_banner.dart';
 import 'package:blibli/widget/hi_blur.dart';
 import 'package:blibli/widget/hi_flexible_header.dart';
-import 'package:blibli/widget/hi_tab.dart';
 import 'package:flutter/material.dart';
+import 'package:hi_net/core/hi_error.dart';
 
 import '../util/toast.dart';
 

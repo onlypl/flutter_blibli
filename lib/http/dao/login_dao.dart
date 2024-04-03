@@ -1,13 +1,12 @@
 // ignore_for_file: unused_element, avoid_print, constant_identifier_names
 
 import 'package:blibli/db/hi_cache.dart';
-import 'package:blibli/http/core/hi_net.dart';
-import 'package:blibli/http/request/base_request.dart';
+import 'package:hi_net/hi_net.dart';
 import 'package:blibli/http/request/login_request.dart';
 import 'package:blibli/http/request/registration_request.dart';
 
 import '../../util/log.dart';
-
+import '../request/base_request.dart';
 class LoginDao {
   static const BOAROING_PASS = 'boarding-pass';
   static login(String userName, String password) {

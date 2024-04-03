@@ -1,8 +1,7 @@
-import 'package:blibli/http/core/hi_net.dart';
-import 'package:blibli/http/request/base_request.dart';
+import 'package:hi_net/hi_net.dart';
 import 'package:blibli/http/request/favorite_request.dart';
 import 'package:blibli/util/log.dart';
-
+import '../request/base_request.dart';
 class FavorriteDao{
   static favorite(String vid,bool favorite) async{
     BaseRequest request = favorite ? FavoriteRequest() : CancelFavoriteRequest();

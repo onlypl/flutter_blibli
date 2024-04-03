@@ -5,8 +5,6 @@ import 'dart:io';
 import 'package:blibli/barrage/barrage_input.dart';
 import 'package:blibli/barrage/barrage_switch.dart';
 import 'package:blibli/barrage/hi_barrage.dart';
-import 'package:blibli/barrage/hi_socket.dart';
-import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/dao/favorrite_dao.dart';
 import 'package:blibli/http/dao/video_detail_dao.dart';
 import 'package:blibli/model/video_detail_model.dart';
@@ -23,6 +21,7 @@ import 'package:blibli/widget/video_tool_bar.dart';
 import 'package:blibli/widget/video_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay/flutter_overlay.dart';
+import 'package:hi_net/core/hi_error.dart';
 import '../model/video_model.dart';
 
 class VideoDetailPage extends StatefulWidget {

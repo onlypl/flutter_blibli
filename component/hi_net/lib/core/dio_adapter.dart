@@ -2,15 +2,15 @@
 
 // ignore_for_file: prefer_typing_uninitialized_variables
 
-import 'package:blibli/http/core/hi_error.dart';
-import 'package:blibli/http/core/hi_net_adapter.dart';
-import 'package:blibli/http/request/base_request.dart';
-import 'package:blibli/util/log.dart';
 import 'package:dio/dio.dart';
+import 'package:logger/web.dart';
+import '../request/hi_base_request.dart';
+import 'hi_error.dart';
+import 'hi_net_adapter.dart';
 
 class DioAdapter extends HiNetAdapter {
   @override
-  Future<HiNetResponse<T>> send<T>(BaseRequest request) async {
+  Future<HiNetResponse<T>> send<T>(HiBaseRequest request) async {
     var response, options = Options(headers: request.header);
    Dio dio = Dio();
     var error;
@@ -29,13 +29,13 @@ class DioAdapter extends HiNetAdapter {
       error = e;
       response = e.response;
       if (response != null) {
-        Log().error(response.data);
-        Log().error(response.headers);
-        Log().error(response.requestOptions);
+        Logger().d(response.data);
+        Logger().d(response.headers);
+        Logger().d(response.requestOptions);
       } else {
         // Something happened in setting up or sending the request that triggered an Error
-        Log().error(e.requestOptions);
-        Log().error(e.message);
+        Logger().d(e.requestOptions);
+        Logger().d(e.message);
       }
     }
     
@@ -47,7 +47,7 @@ class DioAdapter extends HiNetAdapter {
   }
 
   Future<HiNetResponse<T>> buildRes<T>(
-      Response? response, BaseRequest request) {
+      Response? response, HiBaseRequest request) {
     return Future.value(
       HiNetResponse(
         data: response?.data,

@@ -1,11 +1,10 @@
 
 import 'dart:convert';
 
-import 'package:blibli/http/request/base_request.dart';
+import '../request/hi_base_request.dart';
 //网络请求抽象类
 abstract class HiNetAdapter{
-  // ignore: non_constant_identifier_names
-  Future<HiNetResponse<T>> send<T>(BaseRequest request);
+  Future<HiNetResponse<T>> send<T>(HiBaseRequest request);
 }
 
 
@@ -22,7 +21,7 @@ class HiNetResponse<T> {
 
 
   T? data;
-  BaseRequest request;
+  HiBaseRequest request;
   int? statusCode;
   String? statusMessage;
   late dynamic extra;

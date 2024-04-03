@@ -1,8 +1,6 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first, avoid_print
 import 'package:blibli/navigator/hi_navigator.dart';
-import 'package:blibli/provider/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:blibli/http/core/hi_error.dart';
 import 'package:blibli/http/dao/login_dao.dart';
 import 'package:blibli/util/string_util.dart';
 import 'package:blibli/util/toast.dart';
@@ -10,7 +8,7 @@ import 'package:blibli/widget/appbar.dart';
 import 'package:blibli/widget/login_button.dart';
 import 'package:blibli/widget/login_effect.dart';
 import 'package:blibli/widget/login_input.dart';
-import 'package:provider/provider.dart';
+import 'package:hi_net/core/hi_error.dart';
 
 import '../util/log.dart';
 

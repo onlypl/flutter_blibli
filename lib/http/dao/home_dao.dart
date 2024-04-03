@@ -1,4 +1,4 @@
-import 'package:blibli/http/core/hi_net.dart';
+import 'package:hi_net/hi_net.dart';
 import 'package:blibli/http/request/home_request.dart';
 import 'package:blibli/model/home_model.dart';
 import '../../util/log.dart';
