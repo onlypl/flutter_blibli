@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:blibli/barrage/barrage_transition.dart';
 import 'package:flutter/material.dart';
+
+import 'barrage_transition.dart';
 
 //弹幕widget
 class BarrageItem extends StatelessWidget {

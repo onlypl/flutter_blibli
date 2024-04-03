@@ -1,16 +1,16 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 import 'dart:math';
 
-import 'package:blibli/barrage/barrage_view_util.dart';
-import 'package:blibli/barrage/i_barrage.dart';
-import 'package:blibli/barrage/barrage_model.dart';
-import 'package:blibli/barrage/hi_socket.dart';
-import 'package:blibli/util/log.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'barrage_item.dart';
+import 'barrage_model.dart';
+import 'barrage_view_util.dart';
+import 'hi_socket.dart';
+import 'i_barrage.dart';
+
 
 enum BarrageStatus { play, pause }
 
@@ -21,13 +21,15 @@ class HiBarrage extends StatefulWidget {
   final int speed; //速度
   final double top; //顶部距离
   final bool autoPlay; //是否自动播放
+  final Map<String, dynamic> headers; //请求头校验
   const HiBarrage({
     super.key,
     this.lineCount = 4,
     required this.vid,
     this.speed = 800,
     this.top = 0,
-    this.autoPlay = false,
+    this.autoPlay = false, 
+    required this.headers,
   });
 
   @override
@@ -47,7 +49,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
   @override
   void initState() {
     super.initState();
-    _hiSocket = HiSocket();
+    _hiSocket = HiSocket(widget.headers);
     _hiSocket.open(widget.vid).listen((value) {
       _handleMessage(value);
     });
@@ -62,7 +64,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
 
   @override
   Widget build(BuildContext context) {
-    _width = ScreenUtil().screenWidth;
+    _width = MediaQuery.of(context).size.width;
     _height = _width / 16 * 9;
     return SizedBox(
       width: _width,
@@ -98,19 +100,19 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
   @override
   void play() {
     _barrageStatus = BarrageStatus.play;
-    Log().info('播放弹幕');
+    print('播放弹幕');
     if (_timer != null && (_timer?.isActive ?? false)) return;
     //每间隔一段时间发送一次弹幕
     _timer = Timer.periodic(Duration(milliseconds: widget.speed), (timer) {
-      Log().info('启动发送弹幕');
+      print('启动发送弹幕');
       if (_barrageList.isNotEmpty) {
         //将取出发送的弹幕并从集合中移除
         var temp = _barrageList.removeAt(0);
         addBarrage(temp);
-        Log().info('发送弹幕:${temp.content}');
+        print('发送弹幕:${temp.content}');
       } else {
         //弹幕没有数据了,关闭定时器
-         Log().info('弹幕没有数据了,关闭定时器');
+         print('弹幕没有数据了,关闭定时器');
         _timer?.cancel();
       }
     });
@@ -140,7 +142,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
     _barrageStatus = BarrageStatus.pause; //状态改变
     _barrageItemList.clear(); //清除屏幕弹幕
     setState(() {});
-    Log().info('暂停发送弹幕');
+    print('暂停发送弹幕');
     _timer?.cancel(); //关闭定时器
   }
 
@@ -153,7 +155,7 @@ class HiBarrageState extends State<HiBarrage> implements IBarrage {
   }
   //
   void _onComplete(id) {
-    Log().info('播放完毕:$id');
+    print('播放完毕:$id');
     //弹幕播放完毕将其从弹幕widget集合中删除
     _barrageItemList.removeWhere((element) => element.id == id);
   }

@@ -2,9 +2,8 @@
 // ignore_for_file: avoid_unnecessary_containers
 
 import 'dart:io';
-import 'package:blibli/barrage/barrage_input.dart';
-import 'package:blibli/barrage/barrage_switch.dart';
-import 'package:blibli/barrage/hi_barrage.dart';
+import 'package:blibli/widget/barrage_input.dart';
+import 'package:blibli/widget/barrage_switch.dart';
 import 'package:blibli/http/dao/favorrite_dao.dart';
 import 'package:blibli/http/dao/video_detail_dao.dart';
 import 'package:blibli/model/video_detail_model.dart';
@@ -21,8 +20,11 @@ import 'package:blibli/widget/video_tool_bar.dart';
 import 'package:blibli/widget/video_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_overlay/flutter_overlay.dart';
+import 'package:hi_barrage/hi_barrage.dart';
 import 'package:hi_net/core/hi_error.dart';
+import '../http/dao/login_dao.dart';
 import '../model/video_model.dart';
+import '../util/hi_constants.dart';
 
 class VideoDetailPage extends StatefulWidget {
   final VideoModel videoModel;
@@ -102,6 +104,7 @@ class _VideoDetailPageState extends State<VideoDetailPage>
         key: _barrageKey,
         vid: model.vid ?? '',
         autoPlay: true,
+        headers:HiConstants.headers(),
       ),
     );
   }

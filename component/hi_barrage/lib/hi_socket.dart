@@ -1,6 +1,6 @@
-import 'package:blibli/http/dao/login_dao.dart';
-import 'package:blibli/util/hi_constants.dart';
-import 'package:blibli/util/log.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/io.dart';
 
@@ -8,18 +8,21 @@ import 'barrage_model.dart';
 
 ///负责与后端进行websocket通信
 class HiSocket implements ISocket {
+  final Map<String, dynamic> headers;
   static const _url = 'wss://api.devio.org/uapi/fa/barrage/';
   late IOWebSocketChannel? _channel;
   late ValueChanged<List<BarrageModel>>? _callBack;
+  HiSocket(this.headers);
 
   ///心跳间隔秒数, 根据服务器实际timeout时间来调，这里nginx服务器的timeout为60
   final int _intervalSeconds = 50;
   @override
   ISocket open(String vid) {
       _channel = IOWebSocketChannel.connect(_url + vid,
-       headers: _headers(), pingInterval: Duration(seconds: _intervalSeconds));
+       headers: headers, 
+       pingInterval: Duration(seconds: _intervalSeconds));
        _channel?.stream.handleError((error){
-          Log().error('webSocket连接发生错误:$error');
+         print('webSocket连接发生错误:$error');
        }).listen((message) {
            _headerMessage(message);
        });
@@ -44,19 +47,9 @@ class HiSocket implements ISocket {
     _callBack = callBack;
     return this;
   }
-
-  _headers() {
-    ///设置请求头校验 注意留意：Console的输出:flutter: received:
-    Map<String, dynamic> header = {
-      HiConstants.authTokenK: HiConstants.authTokenV,
-      HiConstants.courseFlagK: HiConstants.courseFlagV
-    };
-    header[LoginDao.BOAROING_PASS] = LoginDao.getBoardingPass();
-    return header;
-  }
   //处理服务端返回数据
   void _headerMessage(message) {
-     Log().info('webSocket:received:$message');
+     print('webSocket:received:$message');
      var result = BarrageModel.fromJsonString(message);
      if(_channel!=null && _callBack != null){
         _callBack!(result);
