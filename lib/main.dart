@@ -1,16 +1,20 @@
 // ignore_for_file: avoid_print, prefer_is_empty, deprecated_member_use, camel_case_types, prefer_typing_uninitialized_variables
 
+import 'dart:async';
+
 import 'package:blibli/db/hi_cache.dart';
 import 'package:blibli/navigator/bottom_navigator.dart';
 import 'package:blibli/page/video_detail_page.dart';
 import 'package:blibli/provider/hi_provider.dart';
 import 'package:blibli/provider/theme_provider.dart';
+import 'package:blibli/util/hi_defend.dart';
 import 'package:hi_base/color.dart';
 import 'package:blibli/util/toast.dart';
 import 'package:flutter/material.dart';
 import 'package:blibli/navigator/hi_navigator.dart';
 import 'package:blibli/page/login_page.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hi_base/log.dart';
 import 'package:provider/provider.dart';
 import 'http/dao/login_dao.dart';
 import 'model/video_model.dart';
@@ -18,7 +22,9 @@ import 'page/dark_mode_page.dart';
 import 'page/registration_page.dart';
 
 void main() {
-  runApp(const BiliApp());
+  //捕获异常
+  HiDefend().run(const BiliApp());
+    runApp(const BiliApp());
 }
 
 class BiliApp extends StatefulWidget {
